@@ -18,7 +18,7 @@
 
         * {
             box-sizing: border-box;
-            font-family: 'Kanit', sans-serif; /* ใช้ Kanit เป็นหลัก */
+            font-family: 'Kanit', sans-serif;
             color: var(--light-gray);
         }
 
@@ -29,69 +29,78 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            /* พื้นหลังแนวป่ารกร้าง/ซอมบี้ */
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://i.imgur.com/rQ0Y0bS.jpg') no-repeat center center fixed; /* รูปป่ารกร้าง */
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://i.imgur.com/rQ0Y0bS.jpg') no-repeat center center fixed;
             background-size: cover;
         }
 
         .container {
-            background: rgba(0, 0, 0, 0.85); /* พื้นหลังดำเข้มโปร่งใส */
-            border: 2px solid var(--dark-red); /* ขอบเลือดๆ */
+            background: rgba(0, 0, 0, 0.85);
+            border: 2px solid var(--dark-red);
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 0 30px rgba(var(--blood-red), 0.7); /* เงาสะท้อนเลือด */
+            box-shadow: 0 0 30px rgba(231, 76, 60, 0.7);
             width: 90%;
             max-width: 500px;
             text-align: center;
             transition: 0.5s;
             position: relative;
-            overflow: hidden; /* ซ่อนเลือดที่ล้น */
+            overflow: hidden;
         }
 
-        /* เอฟเฟกต์รอยเลือดมุม */
         .container::before {
             content: '';
             position: absolute;
             top: -20px; left: -20px;
             width: 80px; height: 80px;
-            background: url('https://i.imgur.com/i9P4x6y.png') no-repeat center center; /* รอยเลือด */
+            background: url('https://i.imgur.com/i9P4x6y.png') no-repeat center center;
             background-size: contain;
             transform: rotate(-30deg);
         }
+        
         .container::after {
             content: '';
             position: absolute;
             bottom: -20px; right: -20px;
             width: 80px; height: 80px;
-            background: url('https://i.imgur.com/i9P4x6y.png') no-repeat center center; /* รอยเลือด */
+            background: url('https://i.imgur.com/i9P4x6y.png') no-repeat center center;
             background-size: contain;
             transform: rotate(150deg);
         }
 
-
         h1 {
-            font-family: 'Creepster', cursive; /* ฟอนต์ซอมบี้ */
+            font-family: 'Creepster', cursive;
             color: var(--blood-red);
-            font-size: 4em; /* ตัวใหญ่ๆ */
+            font-size: 3.5em;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 5px var(--dark-gray);
+            text-shadow: 3px 3px 8px rgba(0,0,0,0.8), 0 0 20px var(--blood-red);
+            animation: pulse 2s infinite;
         }
+        
+        @keyframes pulse {
+            0%, 100% { text-shadow: 3px 3px 8px rgba(0,0,0,0.8), 0 0 20px var(--blood-red); }
+            50% { text-shadow: 3px 3px 8px rgba(0,0,0,0.8), 0 0 30px var(--blood-red), 0 0 40px var(--blood-red); }
+        }
+
         h2 {
-            font-family: 'Kanit', sans-serif; /* ใช้ Kanit สำหรับคำถาม */
+            font-family: 'Kanit', sans-serif;
             color: var(--light-gray);
             font-size: 1.8em;
             margin-bottom: 25px;
-            min-height: 80px; /* กันข้อความกระโดด */
+            min-height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        p { color: var(--light-gray); margin-bottom: 30px; font-size: 1.1em; }
+        
+        p { 
+            color: var(--light-gray); 
+            margin-bottom: 30px; 
+            font-size: 1.1em; 
+        }
 
-        /* ปุ่มคำตอบ */
         .btn {
             background: var(--dark-gray);
-            color: var(--zombie-green); /* สีเขียวเหมือนไวรัส */
+            color: var(--zombie-green);
             border: 1px solid var(--zombie-green);
             padding: 15px 20px;
             margin: 10px 0;
@@ -104,14 +113,18 @@
             display: block;
         }
 
-        .btn:hover {
+        .btn:hover:not(:disabled) {
             background: var(--zombie-green);
             color: var(--dark-gray);
             transform: translateY(-3px) scale(1.02);
             box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
         }
 
-        /* ปุ่มเริ่มเกมเป็นสีแดงเลือด */
+        .btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+
         .btn-start {
             background: var(--blood-red);
             color: white;
@@ -121,11 +134,13 @@
             border-radius: 50px;
         }
 
-        .btn-start:hover { background: var(--dark-red); }
+        .btn-start:hover { 
+            background: var(--dark-red); 
+            transform: scale(1.05);
+        }
 
         .hidden { display: none; }
 
-        /* Progress Bar แนวซอมบี้ */
         .progress-bar {
             height: 10px;
             background: var(--dark-gray);
@@ -134,6 +149,7 @@
             overflow: hidden;
             border: 1px solid var(--zombie-green);
         }
+        
         #progress-inner {
             height: 100%;
             background: var(--zombie-green);
@@ -141,13 +157,20 @@
             transition: width 0.5s ease-in-out;
         }
 
-        /* แอนิเมชัน */
         .fade-in {
             animation: fadeIn 0.8s ease;
         }
+        
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question-counter {
+            font-size: 0.9em;
+            color: var(--zombie-green);
+            margin-bottom: 15px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -161,6 +184,7 @@
         </div>
 
         <div id="quiz-screen" class="hidden">
+            <div class="question-counter" id="question-counter">คำถาม 1/12</div>
             <div class="progress-bar">
                 <div id="progress-inner"></div>
             </div>
@@ -178,33 +202,40 @@
     </div>
 
     <script>
-        // --- 2. การควบคุมเกม (JavaScript) ---
         const zombieQuestions = [
             { q: "อะไรคือจุดอ่อนของซอมบี้ส่วนใหญ่?", a: ["แขน", "ขา", "หัว", "ลำตัว"], c: 2 },
             { q: "อาวุธไหนเหมาะกับการเอาตัวรอดจากฝูงซอมบี้ในที่แคบ?", a: ["ปืนไรเฟิล", "มีดเดินป่า", "ระเบิดมือ", "รถถัง"], c: 1 },
             { q: "ถ้าเพื่อนติดเชื้อ คุณควรทำอย่างไร?", a: ["หนีไป", "ช่วยเหลือ", "ยิงทิ้ง", "กอดลา"], c: 2 },
-            { q: "ข้อใดไม่ใช่เสบียงที่สำคัญในการเอาตัวรอด?", a: ["น้ำดื่ม", "อาหารแห้ง", "แผนที่", "ทีวีจอแบน"], c: 3 }
+            { q: "ข้อใดไม่ใช่เสบียงที่สำคัญในการเอาตัวรอด?", a: ["น้ำดื่ม", "อาหารแห้ง", "แผนที่", "ทีวีจอแบน"], c: 3 },
+            { q: "สถานที่ไหนปลอดภัยที่สุดในการหลบซอมบี้?", a: ["ห้างสรรพสินค้า", "โรงพยาบาล", "เกาะกลางทะเล", "โรงเรียน"], c: 2 },
+            { q: "เสียงอะไรดึงดูดซอมบี้มากที่สุด?", a: ["เสียงดนตรี", "เสียงระเบิด", "เสียงมนุษย์", "เสียงรถยนต์"], c: 2 },
+            { q: "เวลากลางคืนควรทำอย่างไรดีที่สุด?", a: ["จุดไฟกองใหญ่", "หลับพักผ่อน", "ตั้งยามเวร", "ออกหาอาหาร"], c: 2 },
+            { q: "อุปกรณ์ไหนสำคัญที่สุดในการเอาตัวรอดระยะยาว?", a: ["มีดพก", "วิทยุสื่อสาร", "ที่กรองน้ำ", "ไฟฉาย"], c: 2 },
+            { q: "ถ้าเจอฝูงซอมบี้ขนาดใหญ่ควรทำอย่างไร?", a: ["ยิงหมด", "หนีทันที", "ซ่อนตัว", "ตะโกนขอความช่วยเหลือ"], c: 1 },
+            { q: "พาหนะไหนเหมาะกับการหนีซอมบี้มากที่สุด?", a: ["จักรยาน", "รถบรรทุก", "เฮลิคอปเตอร์", "รถมอเตอร์ไซค์"], c: 3 },
+            { q: "อาการแรกของการติดเชื้อซอมบี้คืออะไร?", a: ["ไข้สูง", "หิวเลือด", "ตาแดง", "ผิวเขียว"], c: 0 },
+            { q: "กลุ่มไหนมีโอกาสรอดสูงที่สุด?", a: ["คนเดียว", "2-3 คน", "กลุ่มใหญ่ 10+ คน", "ครอบครัว"], c: 1 }
         ];
 
         let currentIdx = 0;
         let score = 0;
 
         function beginGame() {
+            currentIdx = 0;
+            score = 0;
             document.getElementById('start-screen').classList.add('hidden');
             document.getElementById('quiz-screen').classList.remove('hidden');
             updateUI();
         }
 
         function updateUI() {
-            // อัปเดตคำถาม
             const item = zombieQuestions[currentIdx];
             document.getElementById('question-text').innerText = item.q;
+            document.getElementById('question-counter').innerText = `คำถาม ${currentIdx + 1}/${zombieQuestions.length}`;
 
-            // อัปเดตแถบความคืบหน้า
             const progress = ((currentIdx) / zombieQuestions.length) * 100;
             document.getElementById('progress-inner').style.width = progress + "%";
 
-            // สร้างปุ่มคำตอบ
             const zone = document.getElementById('answer-zone');
             zone.innerHTML = "";
             item.a.forEach((txt, i) => {
@@ -217,19 +248,34 @@
         }
 
         function checkAns(choice) {
+            const buttons = document.querySelectorAll('#answer-zone .btn');
+            buttons.forEach(btn => btn.disabled = true);
+            
+            const correctBtn = buttons[zombieQuestions[currentIdx].c];
+            const selectedBtn = buttons[choice];
+            
             if(choice === zombieQuestions[currentIdx].c) {
                 score++;
-                // alert("ถูกต้อง! คุณรอดไปได้อีกหนึ่งวัน!"); // อาจจะใช้ alert เพื่อความดุดัน
+                selectedBtn.style.background = "var(--zombie-green)";
+                selectedBtn.style.color = "white";
+                selectedBtn.innerHTML = "✓ " + selectedBtn.innerText;
             } else {
-                // alert("ผิด! คุณโดนกัดแล้ว!");
+                selectedBtn.style.background = "var(--blood-red)";
+                selectedBtn.style.color = "white";
+                selectedBtn.innerHTML = "✗ " + selectedBtn.innerText;
+                correctBtn.style.background = "var(--zombie-green)";
+                correctBtn.style.color = "white";
+                correctBtn.innerHTML = "✓ " + correctBtn.innerText;
             }
             
-            currentIdx++;
-            if(currentIdx < zombieQuestions.length) {
-                updateUI();
-            } else {
-                showFinal();
-            }
+            setTimeout(() => {
+                currentIdx++;
+                if(currentIdx < zombieQuestions.length) {
+                    updateUI();
+                } else {
+                    showFinal();
+                }
+            }, 1500);
         }
 
         function showFinal() {
@@ -237,6 +283,23 @@
             document.getElementById('quiz-screen').classList.add('hidden');
             document.getElementById('result-screen').classList.remove('hidden');
             document.getElementById('score-display').innerText = score + " / " + zombieQuestions.length;
+            
+            const resultText = document.querySelector('#result-screen p');
+            const emoji = document.querySelector('#result-screen div');
+            
+            if(score === zombieQuestions.length) {
+                resultText.innerText = "🎉 ยอดเยี่ยม! คุณคือนักรอดชีพมืออาชีพ!";
+                emoji.innerText = "🏆";
+            } else if(score >= zombieQuestions.length * 0.7) {
+                resultText.innerText = "👍 เก่งมาก! คุณมีโอกาสรอดสูง!";
+                emoji.innerText = "💪";
+            } else if(score >= zombieQuestions.length * 0.5) {
+                resultText.innerText = "😅 พอใช้ได้! แต่ต้องเรียนรู้เพิ่มนะ";
+                emoji.innerText = "🤔";
+            } else {
+                resultText.innerText = "💀 เสียใจด้วย... คุณคงกลายเป็นซอมบี้แล้ว";
+                emoji.innerText = "🧟‍♂️";
+            }
         }
     </script>
 </body>

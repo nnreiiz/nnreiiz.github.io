@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="th" class="h-full">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Order - Delicious Menu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="h-full bg-gray-50">
+    <div id="app" class="h-full w-full flex flex-col max-w-2xl mx-auto bg-white shadow-xl min-h-screen">
+
+        <!-- Header -->
+        <header class="bg-white sticky top-0 z-40 px-6 py-4 border-b border-gray-100 flex items-center gap-4">
+            <a href="index.html"
+                class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition">
+                ←
+            </a>
+            <h1 class="text-xl font-bold text-gray-800">ตะกร้าของคุณ</h1>
+        </header>
+
+        <!-- Cart Items -->
+        <main class="flex-1 overflow-auto p-6">
+            <div id="cart-items-container" class="space-y-4">
+                <!-- Items will be injected here -->
+            </div>
+        </main>
+
+        <!-- Footer / Checkout -->
+        <div class="p-6 border-t border-gray-100 bg-gray-50">
+            <div class="flex justify-between items-center mb-6">
+                <span class="text-gray-600 text-lg">รวมทั้งหมด</span>
+                <span id="cart-total" class="text-3xl font-bold text-orange-500">฿0</span>
+            </div>
+            <button onclick="confirmOrder()" id="checkout-btn"
+                class="w-full bg-gradient-to-r from-orange-400 to-red-500 text-white py-4 rounded-xl font-semibold btn-primary disabled:opacity-50 disabled:cursor-not-allowed shadow-lg text-lg"
+                disabled>
+                ยืนยันการสั่ง
+            </button>
+        </div>
+
+        <!-- Success Modal -->
+        <div id="success-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+            <div class="absolute inset-0 bg-black/50 overlay"></div>
+            <div class="relative bg-white rounded-3xl p-8 max-w-sm w-full text-center animate-bounce-in shadow-2xl">
+                <div
+                    class="w-24 h-24 mx-auto mb-6 bg-green-100 rounded-full flex items-center justify-center text-5xl animate-pulse">
+                    ✅
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">สั่งอาหารสำเร็จ!</h2>
+                <p class="text-gray-500 mb-8">ขอบคุณที่ใช้บริการ ออเดอร์ของคุณถูกส่งไปยังครัวแล้ว</p>
+                <button onclick="closeSuccessModal()"
+                    class="w-full bg-gradient-to-r from-orange-400 to-red-500 text-white px-8 py-3 rounded-xl font-semibold btn-primary shadow-lg">
+                    กลับหน้าหลัก
+                </button>
+            </div>
+        </div>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

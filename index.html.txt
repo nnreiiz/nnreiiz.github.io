@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zombie Survival Quiz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Kanit:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- 1. การตกแต่ง UI (CSS) แนวซอมบี้ --- */
+        :root {
+            --dark-red: #8b0000;
+            --blood-red: #e74c3c;
+            --dark-gray: #2c3e50;
+            --light-gray: #ecf0f1;
+            --zombie-green: #27ae60;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Kanit', sans-serif; /* ใช้ Kanit เป็นหลัก */
+            color: var(--light-gray);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* พื้นหลังแนวป่ารกร้าง/ซอมบี้ */
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://i.imgur.com/rQ0Y0bS.jpg') no-repeat center center fixed; /* รูปป่ารกร้าง */
+            background-size: cover;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.85); /* พื้นหลังดำเข้มโปร่งใส */
+            border: 2px solid var(--dark-red); /* ขอบเลือดๆ */
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(var(--blood-red), 0.7); /* เงาสะท้อนเลือด */
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            transition: 0.5s;
+            position: relative;
+            overflow: hidden; /* ซ่อนเลือดที่ล้น */
+        }
+
+        /* เอฟเฟกต์รอยเลือดมุม */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -20px; left: -20px;
+            width: 80px; height: 80px;
+            background: url('https://i.imgur.com/i9P4x6y.png') no-repeat center center; /* รอยเลือด */
+            background-size: contain;
+            transform: rotate(-30deg);
+        }
+        .container::after {
+            content: '';
+            position: absolute;
+            bottom: -20px; right: -20px;
+            width: 80px; height: 80px;
+            background: url('https://i.imgur.com/i9P4x6y.png') no-repeat center center; /* รอยเลือด */
+            background-size: contain;
+            transform: rotate(150deg);
+        }
+
+
+        h1 {
+            font-family: 'Creepster', cursive; /* ฟอนต์ซอมบี้ */
+            color: var(--blood-red);
+            font-size: 4em; /* ตัวใหญ่ๆ */
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 5px var(--dark-gray);
+        }
+        h2 {
+            font-family: 'Kanit', sans-serif; /* ใช้ Kanit สำหรับคำถาม */
+            color: var(--light-gray);
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            min-height: 80px; /* กันข้อความกระโดด */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        p { color: var(--light-gray); margin-bottom: 30px; font-size: 1.1em; }
+
+        /* ปุ่มคำตอบ */
+        .btn {
+            background: var(--dark-gray);
+            color: var(--zombie-green); /* สีเขียวเหมือนไวรัส */
+            border: 1px solid var(--zombie-green);
+            padding: 15px 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            width: 100%;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .btn:hover {
+            background: var(--zombie-green);
+            color: var(--dark-gray);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+        }
+
+        /* ปุ่มเริ่มเกมเป็นสีแดงเลือด */
+        .btn-start {
+            background: var(--blood-red);
+            color: white;
+            border: none;
+            font-size: 1.5em;
+            padding: 18px;
+            border-radius: 50px;
+        }
+
+        .btn-start:hover { background: var(--dark-red); }
+
+        .hidden { display: none; }
+
+        /* Progress Bar แนวซอมบี้ */
+        .progress-bar {
+            height: 10px;
+            background: var(--dark-gray);
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border: 1px solid var(--zombie-green);
+        }
+        #progress-inner {
+            height: 100%;
+            background: var(--zombie-green);
+            width: 0%;
+            transition: width 0.5s ease-in-out;
+        }
+
+        /* แอนิเมชัน */
+        .fade-in {
+            animation: fadeIn 0.8s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container fade-in" id="main-card">
+        <div id="start-screen">
+            <h1>ZOMBIE QUIZ</h1>
+            <p>คุณจะรอดชีวิตได้หรือไม่? ตอบคำถามเพื่อเอาตัวรอด!</p>
+            <button class="btn btn-start" onclick="beginGame()">เริ่มเอาตัวรอด!</button>
+        </div>
+
+        <div id="quiz-screen" class="hidden">
+            <div class="progress-bar">
+                <div id="progress-inner"></div>
+            </div>
+            <h2 id="question-text">คำถามจะปรากฏที่นี่</h2>
+            <div id="answer-zone"></div>
+        </div>
+
+        <div id="result-screen" class="hidden">
+            <h1>ผลการเอาตัวรอด</h1>
+            <div style="font-size: 60px; margin-bottom: 10px;">🧟</div>
+            <p>คุณรอดจากซอมบี้ได้</p>
+            <h2 id="score-display" style="font-size: 4em; color: var(--zombie-green); margin: 10px 0;">0</h2>
+            <button class="btn btn-start" onclick="location.reload()">ลองเอาตัวรอดอีกครั้ง</button>
+        </div>
+    </div>
+
+    <script>
+        // --- 2. การควบคุมเกม (JavaScript) ---
+        const zombieQuestions = [
+            { q: "อะไรคือจุดอ่อนของซอมบี้ส่วนใหญ่?", a: ["แขน", "ขา", "หัว", "ลำตัว"], c: 2 },
+            { q: "อาวุธไหนเหมาะกับการเอาตัวรอดจากฝูงซอมบี้ในที่แคบ?", a: ["ปืนไรเฟิล", "มีดเดินป่า", "ระเบิดมือ", "รถถัง"], c: 1 },
+            { q: "ถ้าเพื่อนติดเชื้อ คุณควรทำอย่างไร?", a: ["หนีไป", "ช่วยเหลือ", "ยิงทิ้ง", "กอดลา"], c: 2 },
+            { q: "ข้อใดไม่ใช่เสบียงที่สำคัญในการเอาตัวรอด?", a: ["น้ำดื่ม", "อาหารแห้ง", "แผนที่", "ทีวีจอแบน"], c: 3 }
+        ];
+
+        let currentIdx = 0;
+        let score = 0;
+
+        function beginGame() {
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
+            updateUI();
+        }
+
+        function updateUI() {
+            // อัปเดตคำถาม
+            const item = zombieQuestions[currentIdx];
+            document.getElementById('question-text').innerText = item.q;
+
+            // อัปเดตแถบความคืบหน้า
+            const progress = ((currentIdx) / zombieQuestions.length) * 100;
+            document.getElementById('progress-inner').style.width = progress + "%";
+
+            // สร้างปุ่มคำตอบ
+            const zone = document.getElementById('answer-zone');
+            zone.innerHTML = "";
+            item.a.forEach((txt, i) => {
+                const b = document.createElement("button");
+                b.innerText = txt;
+                b.className = "btn fade-in";
+                b.onclick = () => checkAns(i);
+                zone.appendChild(b);
+            });
+        }
+
+        function checkAns(choice) {
+            if(choice === zombieQuestions[currentIdx].c) {
+                score++;
+                // alert("ถูกต้อง! คุณรอดไปได้อีกหนึ่งวัน!"); // อาจจะใช้ alert เพื่อความดุดัน
+            } else {
+                // alert("ผิด! คุณโดนกัดแล้ว!");
+            }
+            
+            currentIdx++;
+            if(currentIdx < zombieQuestions.length) {
+                updateUI();
+            } else {
+                showFinal();
+            }
+        }
+
+        function showFinal() {
+            document.getElementById('progress-inner').style.width = "100%";
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('result-screen').classList.remove('hidden');
+            document.getElementById('score-display').innerText = score + " / " + zombieQuestions.length;
+        }
+    </script>
+</body>
+</html>

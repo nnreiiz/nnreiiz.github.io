@@ -694,8 +694,10 @@
       }, 300);
     }
     
-    // Initialize
-    renderMenu();
+    // Initialize after DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+      renderMenu();
+    });
   </script>
 </body>
 </html>

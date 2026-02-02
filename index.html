@@ -2,14 +2,10 @@
 <html lang="th" class="h-full">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FOODFOOD Menu</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-  
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
   
   <style>
     body {
@@ -403,6 +399,10 @@
     </div>
   </div>
 
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
   <script>
     // Initialize Firebase
     const firebaseConfig = {
@@ -442,6 +442,11 @@
     function renderMenu() {
       const foodMenu = document.getElementById('food-menu');
       const drinksMenu = document.getElementById('drinks-menu');
+      
+      if (!foodMenu || !drinksMenu) {
+        console.error('Menu elements not found!');
+        return;
+      }
       
       foodMenu.innerHTML = foodItems.map((item, i) => createMenuCard(item, i)).join('');
       drinksMenu.innerHTML = drinkItems.map((item, i) => createMenuCard(item, i)).join('');
@@ -694,10 +699,8 @@
       }, 300);
     }
     
-    // Initialize after DOM is ready
-    document.addEventListener('DOMContentLoaded', function() {
-      renderMenu();
-    });
+    // Initialize when DOM is ready
+    renderMenu();
   </script>
 </body>
 </html>

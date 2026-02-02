@@ -2,10 +2,14 @@
 <html lang="th" class="h-full">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport"="width=device-width, initial-scale=1.0">
   <title>FOODFOOD Menu</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
   
   <style>
     body {
@@ -399,10 +403,6 @@
     </div>
   </div>
 
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
-
   <script>
     // Initialize Firebase
     const firebaseConfig = {
@@ -423,30 +423,27 @@
     let cart = [];
     let selectedTable = null;
     
+    // เมนูอาหาร - เปลี่ยน emoji เป็น URL รูปภาพได้
+    // ตัวอย่าง: image: 'https://i.imgur.com/YOUR-IMAGE.jpg'
     const foodItems = [
-      { id: 'f1', name: 'ข้าวขาหมู', desc: 'ข้าวราดขาหมูตุ๋นนุ่ม ราดน้ำซอสเข้มข้น', price: 50, emoji: '🍖', tag: 'Popular' },
-      { id: 'f2', name: 'ข้าวผัดกระเพราหมูกรอบ', desc: 'ข้าวผัดกระเพราเผ็ดร้อน หมูสามชั้นทอดกรอบ', price: 55, emoji: '🍛', tag: 'Signature' },
-      { id: 'f3', name: 'ข้าวผัดกระเพราหมูสับ', desc: 'กระเพราหมูสับคลาสสิค ไข่ดาว', price: 45, emoji: '🍳', tag: '' },
-      { id: 'f4', name: 'ข้าวผัดไข่', desc: 'ข้าวผัดไข่หอมๆ รสชาติกลมกล่อม', price: 35, emoji: '🍚', tag: '' },
-      { id: 'f5', name: 'ข้าวหมูแดง', desc: 'ข้าวราดหมูแดงหวานมัน ไข่ยางมะตูม', price: 45, emoji: '🍖', tag: 'Chef\'s Pick' },
-      { id: 'f6', name: 'ข้าวกะเพราทะเลรวมมิตร', desc: 'กะเพราทะเลผัดเผ็ดร้อน กุ้ง ปลาหมึก หอยแมลงภู่', price: 70, emoji: '🦐', tag: '' }
+      { id: 'f1', name: 'ข้าวขาหมู', desc: 'ข้าวราดขาหมูตุ๋นนุ่ม ราดน้ำซอสเข้มข้น', price: 50, image: 'https://patient-brown-3lh1i2hej3.edgeone.app/ข้าวขาหมู.webp', tag: 'Popular' },
+      { id: 'f2', name: 'ข้าวผัดกระเพราหมูกรอบ', desc: 'ข้าวผัดกระเพราเผ็ดร้อน หมูสามชั้นทอดกรอบ', price: 55, image: 'https://patient-brown-3lh1i2hej3.edgeone.app/ข้าวผัดกระเพราหมูกรอบ.jpg', tag: 'Signature' },
+      { id: 'f3', name: 'ข้าวผัดกระเพราหมูสับ', desc: 'กระเพราหมูสับคลาสสิค ไข่ดาว', price: 45, image: '🍳', tag: '' },
+      { id: 'f4', name: 'ข้าวผัดไข่', desc: 'ข้าวผัดไข่หอมๆ รสชาติกลมกล่อม', price: 35, image: '🍚', tag: '' },
+      { id: 'f5', name: 'ข้าวหมูแดง', desc: 'ข้าวราดหมูแดงหวานมัน ไข่ยางมะตูม', price: 45, image: '🍖', tag: 'Chef\'s Pick' },
+      { id: 'f6', name: 'ข้าวกะเพราทะเลรวมมิตร', desc: 'กะเพราทะเลผัดเผ็ดร้อน กุ้ง ปลาหมึก หอยแมลงภู่', price: 70, image: '🦐', tag: '' }
     ];
     
     const drinkItems = [
-      { id: 'd1', name: 'น้ำเปล่าขวดเล็ก', desc: 'น้ำดื่มสะอาดบรรจุขวด', price: 10, emoji: '💧', tag: '' },
-      { id: 'd2', name: 'น้ำเปล่าขวดใหญ่', desc: 'น้ำดื่มขวดใหญ่ 1.5 ลิตร', price: 15, emoji: '💧', tag: '' },
-      { id: 'd3', name: 'เป๊ปซี่ขวดเล็ก', desc: 'เป๊ปซี่เย็นชื่นใจ', price: 15, emoji: '🥤', tag: 'Popular' },
-      { id: 'd4', name: 'เป๊ปซี่ขวดใหญ่', desc: 'เป๊ปซี่ขวดใหญ่ 1.25 ลิตร', price: 25, emoji: '🥤', tag: '' }
+      { id: 'd1', name: 'น้ำเปล่าขวดเล็ก', desc: 'น้ำดื่มสะอาดบรรจุขวด', price: 10, image: '💧', tag: '' },
+      { id: 'd2', name: 'น้ำเปล่าขวดใหญ่', desc: 'น้ำดื่มขวดใหญ่ 1.5 ลิตร', price: 15, image: '💧', tag: '' },
+      { id: 'd3', name: 'เป๊ปซี่ขวดเล็ก', desc: 'เป๊ปซี่เย็นชื่นใจ', price: 15, image: '🥤', tag: 'Popular' },
+      { id: 'd4', name: 'เป๊ปซี่ขวดใหญ่', desc: 'เป๊ปซี่ขวดใหญ่ 1.25 ลิตร', price: 25, image: '🥤', tag: '' }
     ];
     
     function renderMenu() {
       const foodMenu = document.getElementById('food-menu');
       const drinksMenu = document.getElementById('drinks-menu');
-      
-      if (!foodMenu || !drinksMenu) {
-        console.error('Menu elements not found!');
-        return;
-      }
       
       foodMenu.innerHTML = foodItems.map((item, i) => createMenuCard(item, i)).join('');
       drinksMenu.innerHTML = drinkItems.map((item, i) => createMenuCard(item, i)).join('');
@@ -456,12 +453,18 @@
       const inCart = cart.find(c => c.id === item.id);
       const quantity = inCart ? inCart.quantity : 0;
       
+      // ตรวจสอบว่าเป็น URL รูปหรือ emoji
+      const isImageUrl = item.image && (item.image.startsWith('http') || item.image.startsWith('data:'));
+      const imageHtml = isImageUrl 
+        ? `<img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-xl">`
+        : `<span class="text-4xl">${item.image}</span>`;
+      
       return `
         <div class="menu-card bg-slate-800/50 rounded-2xl overflow-hidden border border-amber-500/10 hover:border-amber-500/40 shadow-xl" style="animation: fadeInUp 0.5s ease-out ${index * 0.1}s forwards; opacity: 0;">
           <div class="p-5">
             <div class="flex items-start justify-between mb-3">
               <div class="flex items-center gap-3">
-                <span class="text-4xl">${item.emoji}</span>
+                ${imageHtml}
                 <div>
                   <h3 class="font-semibold text-amber-100 text-lg">${item.name}</h3>
                   ${item.tag ? `<span class="inline-block px-2 py-0.5 bg-amber-500/20 text-amber-400 text-xs rounded-full">${item.tag}</span>` : ''}
@@ -553,9 +556,15 @@
         const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
         cartTotal.textContent = '฿' + total.toLocaleString();
         
-        cartItems.innerHTML = cart.map(item => `
+        cartItems.innerHTML = cart.map(item => {
+          const isImageUrl = item.image && (item.image.startsWith('http') || item.image.startsWith('data:'));
+          const imageHtml = isImageUrl
+            ? `<img src="${item.image}" alt="${item.name}" class="w-12 h-12 object-cover rounded-lg">`
+            : `<span class="text-3xl">${item.image}</span>`;
+            
+          return `
           <div class="flex items-center gap-4 bg-slate-800/50 rounded-xl p-4 border border-amber-500/10">
-            <span class="text-3xl">${item.emoji}</span>
+            ${imageHtml}
             <div class="flex-1">
               <h4 class="font-semibold text-amber-100">${item.name}</h4>
               <p class="text-amber-400 font-medium">฿${item.price.toLocaleString()}</p>
@@ -570,7 +579,8 @@
               </button>
             </div>
           </div>
-        `).join('');
+        `;
+        }).join('');
       }
     }
     
@@ -699,7 +709,7 @@
       }, 300);
     }
     
-    // Initialize when DOM is ready
+    // Initialize
     renderMenu();
   </script>
 </body>

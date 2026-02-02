@@ -2,8 +2,8 @@
 <html lang="th" class="h-full">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Premium Food Menu</title>
+  <meta name="viewport"="width=device-width, initial-scale=1.0">
+  <title>FOODFOOD Menu</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   
@@ -215,7 +215,7 @@
         </div>
         
         <h1 class="playfair text-5xl font-bold shimmer-text mb-4 animate-fade-up" style="animation-delay: 0.3s; opacity: 0;">FOODFOOD</h1>
-        <p class="text-amber-100/70 text-lg mb-12 animate-fade-up" style="animation-delay: 0.5s; opacity: 0;">ยินดีต้อนรับสู่ร้าน FOODFOODM</p>
+        <p class="text-amber-100/70 text-lg mb-12 animate-fade-up" style="animation-delay: 0.5s; opacity: 0;">ยินดีต้อนรับสู่ร้าน FOODFOOD</p>
         
         <button onclick="showMainApp()" class="animate-fade-up px-12 py-4 bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 text-slate-900 font-semibold text-lg rounded-full shadow-lg shadow-amber-500/30 hover:shadow-amber-500/50 transition-all duration-300 hover:scale-105 active:scale-95" style="animation-delay: 0.7s; opacity: 0;">
           <span class="flex items-center gap-3">
@@ -424,24 +424,24 @@
     let selectedTable = null;
     
     const foodItems = [
-      { id: 'f1', name: 'ข้าวขาหมู', desc: 'เนื้อวากิวระดับพรีเมียม เสิร์ฟพร้อมผักย่างและซอสพริกไทยดำ', price: 2500, emoji: '🥩', tag: 'Signature' },
-      { id: 'f2', name: 'ข้าวผัดกระเพราหมูกรอบ', desc: 'พาสต้าเส้นสดผัดกับทรัฟเฟิลดำและพาร์เมซานชีส', price: 890, emoji: '🍝', tag: 'Popular' },
-      { id: 'f3', name: 'ข้าวผัดกระเพราหมูสับ', desc: 'ปลาซีบาสสดย่างเกลือทะเล เสิร์ฟพร้อมซอสมะนาว', price: 680, emoji: '🐟', tag: '' },
-      { id: 'f4', name: 'ข้าวผัดไข่', desc: 'ซุปครีมเห็ดนุ่มละมุน โรยน้ำมันทรัฟเฟิลขาว', price: 320, emoji: '🍲', tag: '' },
-      { id: 'f5', name: 'ข้าวหมูแดง', desc: 'ข้าวอิตาเลียนผัดกับกุ้ง หอยเชลล์ และปลาหมึก', price: 750, emoji: '🦐', tag: 'Chef\'s Pick' },
-      { id: 'f6', name: 'ข้าวกะเพราทะเลรวมมิตร', desc: 'สลัดกรอบราดซอสซีซาร์ โรยพาร์เมซานและเบคอนกรอบ', price: 280, emoji: '🥗', tag: '' }
+      { id: 'f1', name: 'ข้าวขาหมู', desc: 'ข้าวราดขาหมูตุ๋นนุ่ม ราดน้ำซอสเข้มข้น', price: 50, emoji: '🍖', tag: 'Popular' },
+      { id: 'f2', name: 'ข้าวผัดกระเพราหมูกรอบ', desc: 'ข้าวผัดกระเพราเผ็ดร้อน หมูสามชั้นทอดกรอบ', price: 55, emoji: '🍛', tag: 'Signature' },
+      { id: 'f3', name: 'ข้าวผัดกระเพราหมูสับ', desc: 'กระเพราหมูสับคลาสสิค ไข่ดาว', price: 45, emoji: '🍳', tag: '' },
+      { id: 'f4', name: 'ข้าวผัดไข่', desc: 'ข้าวผัดไข่หอมๆ รสชาติกลมกล่อม', price: 35, emoji: '🍚', tag: '' },
+      { id: 'f5', name: 'ข้าวหมูแดง', desc: 'ข้าวราดหมูแดงหวานมัน ไข่ยางมะตูม', price: 45, emoji: '🍖', tag: 'Chef\'s Pick' },
+      { id: 'f6', name: 'ข้าวกะเพราทะเลรวมมิตร', desc: 'กะเพราทะเลผัดเผ็ดร้อน กุ้ง ปลาหมึก หอยแมลงภู่', price: 70, emoji: '🦐', tag: '' }
     ];
     
     const drinkItems = [
-      { id: 'd1', name: 'น้ำเปล่าขวดเล็ก', desc: 'น้ำเสาวรสสดผสมโซดาและใบมิ้นท์', price: 180, emoji: '🍹', tag: 'Refreshing' },
-      { id: 'd2', name: 'น้ำเปล่าขวดใหญ่', desc: 'เอสเพรสโซผสมนมลาเวนเดอร์หอมละมุน', price: 150, emoji: '☕', tag: 'Popular' },
-      { id: 'd3', name: 'เป๊ปซี่ขวดเล็ก', desc: 'สมูทตี้จากผลเบอร์รี่สดหลากชนิด', price: 160, emoji: '🫐', tag: '' },
-      { id: 'd4', name: 'เป๊ปซี่ขวดใหญ่', desc: 'ชาเขียวมัทฉะเกรดพรีเมียมจากญี่ปุ่น', price: 180, emoji: '🍵', tag: 'Imported' }
+      { id: 'd1', name: 'น้ำเปล่าขวดเล็ก', desc: 'น้ำดื่มสะอาดบรรจุขวด', price: 10, emoji: '💧', tag: '' },
+      { id: 'd2', name: 'น้ำเปล่าขวดใหญ่', desc: 'น้ำดื่มขวดใหญ่ 1.5 ลิตร', price: 15, emoji: '💧', tag: '' },
+      { id: 'd3', name: 'เป๊ปซี่ขวดเล็ก', desc: 'เป๊ปซี่เย็นชื่นใจ', price: 15, emoji: '🥤', tag: 'Popular' },
+      { id: 'd4', name: 'เป๊ปซี่ขวดใหญ่', desc: 'เป๊ปซี่ขวดใหญ่ 1.25 ลิตร', price: 25, emoji: '🥤', tag: '' }
     ];
     
     function renderMenu() {
-      const foodMenu = document.getElementById('เมนูอาหาร');
-      const drinksMenu = document.getElementById('เครื่องดื่ม');
+      const foodMenu = document.getElementById('food-menu');
+      const drinksMenu = document.getElementById('drinks-menu');
       
       foodMenu.innerHTML = foodItems.map((item, i) => createMenuCard(item, i)).join('');
       drinksMenu.innerHTML = drinkItems.map((item, i) => createMenuCard(item, i)).join('');

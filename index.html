@@ -2,7 +2,7 @@
 <html lang="th" class="h-full">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FOODFOOD Menu</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
@@ -172,65 +172,25 @@
 </head>
 <body class="h-full">
   <div id="app" class="h-full w-full overflow-auto bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-    <!-- Splash Screen -->
-    <div id="splash-screen" class="h-full w-full flex flex-col items-center justify-center page-transition page-visible">
-      <div class="text-center">
-        <!-- App Icon -->
-        <div class="animate-float mb-8">
-          <div class="w-72 h-72 mx-auto rounded-3xl gradient-border flex items-center justify-center animate-pulse-glow overflow-hidden">
-            <div class="w-full h-full bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl flex items-center justify-center p-6">
-              <svg viewBox="0 0 200 200" class="w-full h-full">
-                <defs>
-                  <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style="stop-color:#d4af37"/>
-                    <stop offset="50%" style="stop-color:#f4e4a6"/>
-                    <stop offset="100%" style="stop-color:#d4af37"/>
-                  </linearGradient>
-                </defs>
-                <ellipse cx="100" cy="120" rx="75" ry="20" fill="url(#goldGrad)" opacity="0.3"/>
-                <ellipse cx="100" cy="115" rx="70" ry="45" fill="none" stroke="url(#goldGrad)" stroke-width="3"/>
-                <ellipse cx="100" cy="115" rx="55" ry="35" fill="none" stroke="url(#goldGrad)" stroke-width="2" opacity="0.5"/>
-                <path d="M70 70 Q75 50 70 30" stroke="url(#goldGrad)" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.6">
-                  <animate attributeName="d" values="M70 70 Q75 50 70 30;M70 70 Q65 50 70 30;M70 70 Q75 50 70 30" dur="2s" repeatCount="indefinite"/>
-                </path>
-                <path d="M100 60 Q105 40 100 20" stroke="url(#goldGrad)" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.8">
-                  <animate attributeName="d" values="M100 60 Q105 40 100 20;M100 60 Q95 40 100 20;M100 60 Q105 40 100 20" dur="2.5s" repeatCount="indefinite"/>
-                </path>
-                <path d="M130 70 Q135 50 130 30" stroke="url(#goldGrad)" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.6">
-                  <animate attributeName="d" values="M130 70 Q135 50 130 30;M130 70 Q125 50 130 30;M130 70 Q135 50 130 30" dur="2.2s" repeatCount="indefinite"/>
-                </path>
-                <g transform="translate(40, 90) rotate(-30)">
-                  <rect x="0" y="0" width="4" height="50" rx="2" fill="url(#goldGrad)"/>
-                  <rect x="-2" y="-20" width="3" height="20" rx="1" fill="url(#goldGrad)"/>
-                  <rect x="3" y="-20" width="3" height="20" rx="1" fill="url(#goldGrad)"/>
-                  <rect x="8" y="-20" width="3" height="20" rx="1" fill="url(#goldGrad)"/>
-                </g>
-                <g transform="translate(150, 85) rotate(30)">
-                  <rect x="0" y="0" width="5" height="50" rx="2" fill="url(#goldGrad)"/>
-                  <path d="M0 -25 L5 -25 L7 0 L0 0 Z" fill="url(#goldGrad)"/>
-                </g>
-              </svg>
-            </div>
+    
+    <!-- Table Selection Screen -->
+    <div id="table-selection" class="h-full w-full flex flex-col items-center justify-center page-transition page-visible px-6">
+      <div class="max-w-2xl w-full">
+        <div class="text-center mb-8">
+          <div class="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center shadow-xl shadow-amber-500/30">
+            <span class="text-5xl">🪑</span>
           </div>
+          <h1 class="playfair text-4xl font-bold text-amber-400 mb-2">เลือกโต๊ะของคุณ</h1>
+          <p class="text-amber-100/70">กรุณาเลือกหมายเลขโต๊ะก่อนสั่งอาหาร</p>
         </div>
         
-        <h1 class="playfair text-5xl font-bold shimmer-text mb-4 animate-fade-up" style="animation-delay: 0.3s; opacity: 0;">FOODFOOD</h1>
-        <p class="text-amber-100/70 text-lg mb-12 animate-fade-up" style="animation-delay: 0.5s; opacity: 0;">ยินดีต้อนรับสู่ร้าน FOODFOOD</p>
-        
-        <button onclick="showMainApp()" class="animate-fade-up px-12 py-4 bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 text-slate-900 font-semibold text-lg rounded-full shadow-lg shadow-amber-500/30 hover:shadow-amber-500/50 transition-all duration-300 hover:scale-105 active:scale-95" style="animation-delay: 0.7s; opacity: 0;">
-          <span class="flex items-center gap-3">
-            <span>เริ่มต้นใช้งาน</span>
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
-            </svg>
-          </span>
-        </button>
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-4" id="table-grid">
+          <!-- Tables will be rendered here -->
+        </div>
       </div>
       
       <div class="absolute top-10 left-10 w-20 h-20 border border-amber-500/20 rounded-full animate-pulse"></div>
       <div class="absolute bottom-20 right-10 w-32 h-32 border border-amber-500/10 rounded-full animate-pulse" style="animation-delay: 1s;"></div>
-      <div class="absolute top-1/4 right-20 w-2 h-2 bg-amber-400 rounded-full animate-ping"></div>
-      <div class="absolute bottom-1/3 left-16 w-2 h-2 bg-amber-400 rounded-full animate-ping" style="animation-delay: 0.5s;"></div>
     </div>
 
     <!-- Main App -->
@@ -244,16 +204,24 @@
             </div>
             <div>
               <h1 class="playfair text-xl font-bold text-amber-400">FOODFOOD</h1>
-              <p class="text-xs text-amber-100/50">FOODFOOD Menu</p>
+              <p class="text-xs text-amber-100/50">โต๊ะ <span id="current-table-header">-</span></p>
             </div>
           </div>
           
-          <button onclick="showCart()" class="relative p-3 rounded-full bg-slate-800 border border-amber-500/30 hover:border-amber-500 transition-all duration-300 hover:scale-110">
-            <svg class="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
-            </svg>
-            <span id="cart-count" class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center hidden">0</span>
-          </button>
+          <div class="flex items-center gap-3">
+            <button onclick="changeTable()" class="p-3 rounded-full bg-slate-800 border border-amber-500/30 hover:border-amber-500 transition-all duration-300 hover:scale-110">
+              <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+              </svg>
+            </button>
+            
+            <button onclick="showCart()" class="relative p-3 rounded-full bg-slate-800 border border-amber-500/30 hover:border-amber-500 transition-all duration-300 hover:scale-110">
+              <svg class="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+              </svg>
+              <span id="cart-count" class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center hidden">0</span>
+            </button>
+          </div>
         </div>
       </header>
 
@@ -314,7 +282,7 @@
             </button>
           </div>
           
-          <div id="cart-items" class="space-y-4 max-h-[35vh] overflow-auto mb-6"></div>
+          <div id="cart-items" class="space-y-3 max-h-[45vh] overflow-auto mb-6"></div>
           
           <div id="cart-empty" class="text-center py-12 hidden">
             <span class="text-6xl mb-4 block">🛒</span>
@@ -322,63 +290,23 @@
           </div>
           
           <div id="cart-footer" class="border-t border-amber-500/20 pt-4">
-            <div class="mb-4">
-              <label class="block text-amber-100/70 text-xs font-medium mb-2">🪑 เลือกโต๊ะ (ไม่บังคับ)</label>
-              <div class="grid grid-cols-5 gap-1.5">
-                <button onclick="selectTable(1)" class="table-btn aspect-square rounded-xl bg-slate-800 hover:bg-slate-700 border-2 border-amber-500/20 hover:border-amber-500 transition-all flex flex-col items-center justify-center py-2" data-table="1">
-                  <span class="text-lg font-bold text-amber-100">1</span>
-                  <span class="text-xs text-amber-100/50">ว่าง</span>
-                </button>
-                <button onclick="selectTable(2)" class="table-btn aspect-square rounded-xl bg-slate-800 hover:bg-slate-700 border-2 border-amber-500/20 hover:border-amber-500 transition-all flex flex-col items-center justify-center py-2" data-table="2">
-                  <span class="text-lg font-bold text-amber-100">2</span>
-                  <span class="text-xs text-amber-100/50">ว่าง</span>
-                </button>
-                <button onclick="selectTable(3)" class="table-btn aspect-square rounded-xl bg-slate-800 hover:bg-slate-700 border-2 border-amber-500/20 hover:border-amber-500 transition-all flex flex-col items-center justify-center py-2" data-table="3">
-                  <span class="text-lg font-bold text-amber-100">3</span>
-                  <span class="text-xs text-amber-100/50">ว่าง</span>
-                </button>
-                <button onclick="selectTable(4)" class="table-btn aspect-square rounded-xl bg-slate-800 hover:bg-slate-700 border-2 border-amber-500/20 hover:border-amber-500 transition-all flex flex-col items-center justify-center py-2" data-table="4">
-                  <span class="text-lg font-bold text-amber-100">4</span>
-                  <span class="text-xs text-amber-100/50">ว่าง</span>
-                </button>
-                <button onclick="selectTable(5)" class="table-btn aspect-square rounded-xl bg-slate-800 hover:bg-slate-700 border-2 border-amber-500/20 hover:border-amber-500 transition-all flex flex-col items-center justify-center py-2" data-table="5">
-                  <span class="text-lg font-bold text-amber-100">5</span>
-                  <span class="text-xs text-amber-100/50">ว่าง</span>
-                </button>
-                <button onclick="selectTable(6)" class="table-btn aspect-square rounded-xl bg-slate-800 hover:bg-slate-700 border-2 border-amber-500/20 hover:border-amber-500 transition-all flex flex-col items-center justify-center py-2" data-table="6">
-                  <span class="text-lg font-bold text-amber-100">6</span>
-                  <span class="text-xs text-amber-100/50">ว่าง</span>
-                </button>
-                <button onclick="selectTable(7)" class="table-btn aspect-square rounded-xl bg-slate-800 hover:bg-slate-700 border-2 border-amber-500/20 hover:border-amber-500 transition-all flex flex-col items-center justify-center py-2" data-table="7">
-                  <span class="text-lg font-bold text-amber-100">7</span>
-                  <span class="text-xs text-amber-100/50">ว่าง</span>
-                </button>
-                <button onclick="selectTable(8)" class="table-btn aspect-square rounded-xl bg-slate-800 hover:bg-slate-700 border-2 border-amber-500/20 hover:border-amber-500 transition-all flex flex-col items-center justify-center py-2" data-table="8">
-                  <span class="text-lg font-bold text-amber-100">8</span>
-                  <span class="text-xs text-amber-100/50">ว่าง</span>
-                </button>
-                <button onclick="selectTable(9)" class="table-btn aspect-square rounded-xl bg-slate-800 hover:bg-slate-700 border-2 border-amber-500/20 hover:border-amber-500 transition-all flex flex-col items-center justify-center py-2" data-table="9">
-                  <span class="text-lg font-bold text-amber-100">9</span>
-                  <span class="text-xs text-amber-100/50">ว่าง</span>
-                </button>
-                <button onclick="selectTable(10)" class="table-btn aspect-square rounded-xl bg-slate-800 hover:bg-slate-700 border-2 border-amber-500/20 hover:border-amber-500 transition-all flex flex-col items-center justify-center py-2" data-table="10">
-                  <span class="text-lg font-bold text-amber-100">10</span>
-                  <span class="text-xs text-amber-100/50">ว่าง</span>
-                </button>
+            <div class="flex justify-between items-center mb-4 bg-slate-800/50 rounded-xl p-4">
+              <div>
+                <div class="text-amber-100/70 text-sm">โต๊ะของคุณ</div>
+                <div class="text-amber-400 font-bold text-xl">🪑 โต๊ะ <span id="cart-table-number">-</span></div>
+              </div>
+              <div class="text-right">
+                <div class="text-amber-100/70 text-sm">รวมทั้งหมด</div>
+                <div id="cart-total" class="playfair text-2xl font-bold text-amber-400">฿0</div>
               </div>
             </div>
             
-            <div class="flex justify-between items-center mb-3">
-              <span class="text-amber-100/70 text-sm">รวมทั้งหมด</span>
-              <span id="cart-total" class="playfair text-2xl font-bold text-amber-400">฿0</span>
-            </div>
-            
-            <button onclick="placeOrder()" class="w-full py-3 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-bold text-base rounded-2xl shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]">
+            <button onclick="placeOrder()" class="w-full py-4 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-bold text-lg rounded-2xl shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]">
               <span class="flex items-center justify-center gap-2">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                 </svg>
-                <span id="confirm-btn-text">ยืนยันคำสั่งซื้อ</span>
+                <span>ยืนยันคำสั่งซื้อ</span>
               </span>
             </button>
           </div>
@@ -397,53 +325,165 @@
         <h3 class="playfair text-2xl font-bold text-amber-400 mb-2">สั่งอาหารสำเร็จ!</h3>
         <p class="text-amber-100/70 mb-6">ขอบคุณสำหรับคำสั่งซื้อ<br>อาหารกำลังจัดเตรียมให้คุณ</p>
         <button onclick="closeSuccessModal()" class="px-8 py-3 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 font-semibold rounded-full hover:scale-105 transition-transform">
-          ปิด
+          ดำเนินการต่อ
         </button>
       </div>
     </div>
   </div>
 
   <script>
-    // Initialize Firebase
-    const firebaseConfig = {
-      apiKey: "AIzaSyDlPwb7TmtHigRuGOQ8ddfB27_kmam2fr4",
-      authDomain: "foodfood-26.firebaseapp.com",
-      databaseURL: "https://foodfood-26-default-rtdb.asia-southeast1.firebasedatabase.app",
-      projectId: "foodfood-26",
-      storageBucket: "foodfood-26.firebasestorage.app",
-      messagingSenderId: "817922519358",
-      appId: "1:817922519358:web:17345871b0cc340a08fc6f",
-      measurementId: "G-DXJHXXTZ26"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    const database = firebase.database();
-
     let currentTab = 'food';
     let cart = [];
     let selectedTable = null;
+    let occupiedTables = {};
+    let database = null;
+
+    // Wait for Firebase to load
+    function initializeApp() {
+      // Initialize Firebase
+      const firebaseConfig = {
+        apiKey: "AIzaSyDlPwb7TmtHigRuGOQ8ddfB27_kmam2fr4",
+        authDomain: "foodfood-26.firebaseapp.com",
+        databaseURL: "https://foodfood-26-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "foodfood-26",
+        storageBucket: "foodfood-26.firebasestorage.app",
+        messagingSenderId: "817922519358",
+        appId: "1:817922519358:web:17345871b0cc340a08fc6f",
+        measurementId: "G-DXJHXXTZ26"
+      };
+
+      firebase.initializeApp(firebaseConfig);
+      database = firebase.database();
+
+      // Setup Firebase listeners
+      setupFirebaseListeners();
+      
+      // Initialize UI
+      renderMenu();
+      renderTableSelection();
+    }
+
+    function setupFirebaseListeners() {
+      // Listen to table occupancy
+      database.ref('tables').on('value', (snapshot) => {
+        occupiedTables = snapshot.val() || {};
+        renderTableSelection();
+      });
+      
+      // Listen to completed orders to free up tables
+      database.ref('orders').on('child_changed', (snapshot) => {
+        const order = snapshot.val();
+        if (order.status === 'paid' && order.table) {
+          // Free up the table
+          database.ref('tables/' + order.table).remove();
+        }
+      });
+    }
     
-    // เมนูอาหาร - เปลี่ยน emoji เป็น URL รูปภาพได้
-    // ตัวอย่าง: image: 'https://i.imgur.com/YOUR-IMAGE.jpg'
+    // เมนูอาหาร
     const foodItems = [
-      { id: 'f1', name: 'ข้าวขาหมู', desc: 'ข้าวราดขาหมูตุ๋นนุ่ม ราดน้ำซอสเข้มข้น', price: 50, image: 'https://patient-brown-3lh1i2hej3.edgeone.app/ข้าวขาหมู.webp', tag: '' },
-      { id: 'f2', name: 'ข้าวผัดกระเพราหมูกรอบ', desc: 'ข้าวผัดกระเพราเผ็ดร้อน หมูสามชั้นทอดกรอบ', price: 50, image: 'https://patient-brown-3lh1i2hej3.edgeone.app/ข้าวผัดกระเพราหมูกรอบ.jpg', tag: '' },
-      { id: 'f3', name: 'ข้าวผัดกระเพราหมูสับ', desc: 'กระเพราหมูสับคลาสสิค ไข่ดาว', price: 50, image: 'https://patient-brown-3lh1i2hej3.edgeone.app/ข้าวผัดกระเพราหมูสับ.png', tag: '' },
-      { id: 'f4', name: 'ข้าวผัดไข่', desc: 'ข้าวผัดไข่หอมๆ รสชาติกลมกล่อม', price: 50, image: 'https://patient-brown-3lh1i2hej3.edgeone.app/ข้าวผัดไข่.jpg', tag: '' },
-      { id: 'f5', name: 'ข้าวหมูแดง', desc: 'ข้าวราดหมูแดงหวานมัน ไข่ยางมะตูม', price: 50, image: 'https://patient-brown-3lh1i2hej3.edgeone.app/ข้าวหมูแดง.jpg', tag: '' },
-      { id: 'f6', name: 'ข้าวกะเพราทะเลรวมมิตร', desc: 'กะเพราทะเลผัดเผ็ดร้อน กุ้ง ปลาหมึก หอยแมลงภู่', price: 50, image: 'https://vague-blue-64hrizml89.edgeone.app/ข้าวผัดทะเลรวมมืตร.jpg', tag: '' },
-      { id: 'f7', name: 'ข้าวมันไก่', desc: 'ข้าวมันไก่สูตรเข้มข้น เนื้อไก่นุ่ม ข้าวหอมทุกคำ', price: 50, image: 'https://patient-brown-3lh1i2hej3.edgeone.app/ข้าวมันไก่.webp', tag: '' },
-      { id: 'f8', name: 'หมูกระเทียม', desc: 'หมูนุ่ม กระเทียมแน่น รสจัดจ้านกำลังดี', price: 50, image: 'https://patient-brown-3lh1i2hej3.edgeone.app/หมูกระเทียม.webp', tag: '' },
-      { id: 'f9', name: 'สเต็กหมู', desc: 'สเต็กไก่นุ่มฉ่ำ ย่างหอม ๆ ซอสเข้าเนื้อ', price: 50, image: 'https://patient-brown-3lh1i2hej3.edgeone.app/สเต็กหมู.jpg', tag: '' },
-      { id: 'f10', name: 'สเต็กไก่', desc: 'สเต็กหมูนุ่ม ย่างหอม เสิร์ฟร้อน ๆ', price: 50, image: 'https://patient-brown-3lh1i2hej3.edgeone.app/สเต็กไก่.jpg', tag: '' }
+      { id: 'f1', name: 'ข้าวขาหมู', desc: 'ข้าวราดขาหมูตุ๋นนุ่ม ราดน้ำซอสเข้มข้น', price: 50, image: 'https://patient-brown-3lh1i2hej3.edgeone.app/ข้าวขาหมู.webp' },
+      { id: 'f2', name: 'ข้าวผัดกระเพราหมูกรอบ', desc: 'ข้าวผัดกระเพราเผ็ดร้อน หมูสามชั้นทอดกรอบ', price: 50, image: 'https://patient-brown-3lh1i2hej3.edgeone.app/ข้าวผัดกระเพราหมูกรอบ.jpg' },
+      { id: 'f3', name: 'ข้าวผัดกระเพราหมูสับ', desc: 'กระเพราหมูสับคลาสสิค ไข่ดาว', price: 50, image: 'https://patient-brown-3lh1i2hej3.edgeone.app/ข้าวผัดกระเพราหมูสับ.png' },
+      { id: 'f4', name: 'ข้าวผัดไข่', desc: 'ข้าวผัดไข่หอมๆ รสชาติกลมกล่อม', price: 50, image: 'https://patient-brown-3lh1i2hej3.edgeone.app/ข้าวผัดไข่.jpg' },
+      { id: 'f5', name: 'ข้าวหมูแดง', desc: 'ข้าวราดหมูแดงหวานมัน ไข่ยางมะตูม', price: 50, image: 'https://patient-brown-3lh1i2hej3.edgeone.app/ข้าวหมูแดง.jpg' },
+      { id: 'f6', name: 'ข้าวกะเพราทะเลรวมมิตร', desc: 'กะเพราทะเลผัดเผ็ดร้อน กุ้ง ปลาหมึก หอยแมลงภู่', price: 50, image: 'https://vague-blue-64hrizml89.edgeone.app/ข้าวผัดทะเลรวมมืตร.jpg' },
+      { id: 'f7', name: 'ข้าวมันไก่', desc: 'ข้าวมันไก่สูตรเข้มข้น เนื้อไก่นุ่ม', price: 50, image: 'https://patient-brown-3lh1i2hej3.edgeone.app/ข้าวมันไก่.webp' },
+      { id: 'f8', name: 'หมูกระเทียม', desc: 'หมูนุ่ม กระเทียมแน่น รสจัดจ้าน', price: 50, image: 'https://patient-brown-3lh1i2hej3.edgeone.app/หมูกระเทียม.webp' },
+      { id: 'f9', name: 'สเต็กหมู', desc: 'สเต็กหมูนุ่ม ย่างหอม', price: 50, image: 'https://patient-brown-3lh1i2hej3.edgeone.app/สเต็กหมู.jpg' },
+      { id: 'f10', name: 'สเต็กไก่', desc: 'สเต็กไก่นุ่มฉ่ำ ย่างหอม', price: 50, image: 'https://patient-brown-3lh1i2hej3.edgeone.app/สเต็กไก่.jpg' }
     ];
     
     const drinkItems = [
-      { id: 'd1', name: 'น้ำเปล่าขวดเล็ก', desc: 'น้ำดื่มสะอาดบรรจุขวด', price: 10, image: 'https://unfair-amber-cgy9g1a9ls.edgeone.app/น้ำเปล่าขวดกลาง.webp', tag: '' },
-      { id: 'd2', name: 'น้ำเปล่าขวดใหญ่', desc: 'น้ำดื่มขวดใหญ่ 1.5 ลิตร', price: 15, image: 'https://unfair-amber-cgy9g1a9ls.edgeone.app/น้ำเปล่าขวดใหญ่.webp', tag: '' },
-      { id: 'd3', name: 'เป๊ปซี่ขวดเล็ก', desc: 'เป๊ปซี่เย็นชื่นใจ', price: 15, image: 'https://unfair-amber-cgy9g1a9ls.edgeone.app/เป๊ปซี่เล็ก.webp', tag: '' },
-      { id: 'd4', name: 'เป๊ปซี่ขวดใหญ่', desc: 'เป๊ปซี่ขวดใหญ่ 1.25 ลิตร', price: 35, image: 'https://unfair-amber-cgy9g1a9ls.edgeone.app/เป๊ปซี่ใหญ่.jpg', tag: '' }
+      { id: 'd1', name: 'น้ำเปล่าขวดเล็ก', desc: 'น้ำดื่มสะอาดบรรจุขวด', price: 10, image: 'https://unfair-amber-cgy9g1a9ls.edgeone.app/น้ำเปล่าขวดกลาง.webp' },
+      { id: 'd2', name: 'น้ำเปล่าขวดใหญ่', desc: 'น้ำดื่มขวดใหญ่ 1.5 ลิตร', price: 15, image: 'https://unfair-amber-cgy9g1a9ls.edgeone.app/น้ำเปล่าขวดใหญ่.webp' },
+      { id: 'd3', name: 'เป๊ปซี่ขวดเล็ก', desc: 'เป๊ปซี่เย็นชื่นใจ', price: 15, image: 'https://unfair-amber-cgy9g1a9ls.edgeone.app/เป๊ปซี่เล็ก.webp' },
+      { id: 'd4', name: 'เป๊ปซี่ขวดใหญ่', desc: 'เป๊ปซี่ขวดใหญ่ 1.25 ลิตร', price: 35, image: 'https://unfair-amber-cgy9g1a9ls.edgeone.app/เป๊ปซี่ใหญ่.jpg' }
     ];
+    
+    function renderTableSelection() {
+      const grid = document.getElementById('table-grid');
+      if (!grid) return;
+      
+      const tables = [];
+      
+      for (let i = 1; i <= 10; i++) {
+        const isOccupied = occupiedTables[i];
+        const buttonClass = isOccupied 
+          ? 'bg-red-900/30 border-red-500/30 cursor-not-allowed opacity-50' 
+          : 'bg-slate-800 border-amber-500/30 hover:border-amber-500 hover:scale-105 hover:shadow-lg hover:shadow-amber-500/30';
+        
+        tables.push(`
+          <button 
+            ${isOccupied ? 'disabled' : `onclick="selectTableFromGrid(${i})"`}
+            class="aspect-square rounded-2xl border-2 transition-all duration-300 flex flex-col items-center justify-center p-6 ${buttonClass}"
+          >
+            <span class="text-4xl mb-2">${isOccupied ? '🔒' : '🪑'}</span>
+            <span class="text-2xl font-bold ${isOccupied ? 'text-red-400' : 'text-amber-400'}">โต๊ะ ${i}</span>
+            <span class="text-sm ${isOccupied ? 'text-red-300/70' : 'text-amber-100/70'} mt-1">
+              ${isOccupied ? 'ไม่ว่าง' : 'ว่าง'}
+            </span>
+          </button>
+        `);
+      }
+      
+      grid.innerHTML = tables.join('');
+    }
+    
+    function selectTableFromGrid(tableNumber) {
+      selectedTable = tableNumber;
+      
+      // Mark table as occupied
+      database.ref('tables/' + tableNumber).set({
+        occupied: true,
+        timestamp: firebase.database.ServerValue.TIMESTAMP
+      });
+      
+      // Show main app
+      const tableSelection = document.getElementById('table-selection');
+      const mainApp = document.getElementById('main-app');
+      const headerTable = document.getElementById('current-table-header');
+      
+      headerTable.textContent = tableNumber;
+      
+      tableSelection.classList.add('page-hidden');
+      tableSelection.classList.remove('page-visible');
+      
+      setTimeout(() => {
+        mainApp.classList.remove('page-hidden');
+        mainApp.classList.add('page-visible');
+      }, 300);
+    }
+    
+    function changeTable() {
+      if (cart.length > 0) {
+        if (!confirm('การเปลี่ยนโต๊ะจะทำให้ตะกร้าสินค้าถูกล้าง ต้องการดำเนินการต่อหรือไม่?')) {
+          return;
+        }
+      }
+      
+      // Free up current table
+      if (selectedTable) {
+        database.ref('tables/' + selectedTable).remove();
+      }
+      
+      // Clear cart and return to table selection
+      cart = [];
+      selectedTable = null;
+      updateCartUI();
+      renderMenu();
+      
+      const tableSelection = document.getElementById('table-selection');
+      const mainApp = document.getElementById('main-app');
+      
+      mainApp.classList.add('page-hidden');
+      mainApp.classList.remove('page-visible');
+      
+      setTimeout(() => {
+        tableSelection.classList.remove('page-hidden');
+        tableSelection.classList.add('page-visible');
+      }, 300);
+    }
     
     function renderMenu() {
       const foodMenu = document.getElementById('food-menu');
@@ -457,11 +497,10 @@
       const inCart = cart.find(c => c.id === item.id);
       const quantity = inCart ? inCart.quantity : 0;
       
-      // ตรวจสอบว่าเป็น URL รูปหรือ emoji
       const isImageUrl = item.image && (item.image.startsWith('http') || item.image.startsWith('data:'));
       const imageHtml = isImageUrl 
         ? `<img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-xl">`
-        : `<span class="text-4xl">${item.image}</span>`;
+        : `<span class="text-4xl">${item.image || '🍽️'}</span>`;
       
       return `
         <div class="menu-card bg-slate-800/50 rounded-2xl overflow-hidden border border-amber-500/10 hover:border-amber-500/40 shadow-xl" style="animation: fadeInUp 0.5s ease-out ${index * 0.1}s forwards; opacity: 0;">
@@ -471,7 +510,6 @@
                 ${imageHtml}
                 <div>
                   <h3 class="font-semibold text-amber-100 text-lg">${item.name}</h3>
-                  ${item.tag ? `<span class="inline-block px-2 py-0.5 bg-amber-500/20 text-amber-400 text-xs rounded-full">${item.tag}</span>` : ''}
                 </div>
               </div>
             </div>
@@ -545,8 +583,10 @@
       const cartEmpty = document.getElementById('cart-empty');
       const cartFooter = document.getElementById('cart-footer');
       const cartTotal = document.getElementById('cart-total');
+      const cartTableNumber = document.getElementById('cart-table-number');
       
       modal.classList.remove('hidden');
+      cartTableNumber.textContent = selectedTable;
       
       if (cart.length === 0) {
         cartItems.classList.add('hidden');
@@ -563,24 +603,41 @@
         cartItems.innerHTML = cart.map(item => {
           const isImageUrl = item.image && (item.image.startsWith('http') || item.image.startsWith('data:'));
           const imageHtml = isImageUrl
-            ? `<img src="${item.image}" alt="${item.name}" class="w-12 h-12 object-cover rounded-lg">`
-            : `<span class="text-3xl">${item.image}</span>`;
+            ? `<img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg">`
+            : `<span class="text-4xl">${item.image || '🍽️'}</span>`;
+          
+          const itemSubtotal = item.price * item.quantity;
             
           return `
-          <div class="flex items-center gap-4 bg-slate-800/50 rounded-xl p-4 border border-amber-500/10">
-            ${imageHtml}
-            <div class="flex-1">
-              <h4 class="font-semibold text-amber-100">${item.name}</h4>
-              <p class="text-amber-400 font-medium">฿${item.price.toLocaleString()}</p>
+          <div class="bg-slate-800/50 rounded-xl p-4 border border-amber-500/10">
+            <div class="flex items-start gap-3 mb-3">
+              ${imageHtml}
+              <div class="flex-1">
+                <h4 class="font-semibold text-amber-100 text-lg mb-1">${item.name}</h4>
+                <p class="text-amber-100/60 text-sm">${item.desc}</p>
+              </div>
             </div>
-            <div class="flex items-center gap-2">
-              <button onclick="updateCartFromModal('${item.id}', -1)" class="w-8 h-8 rounded-full bg-slate-700 hover:bg-slate-600 text-amber-400 flex items-center justify-center transition-all">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M20 12H4"/></svg>
-              </button>
-              <span class="w-6 text-center font-bold text-amber-100">${item.quantity}</span>
-              <button onclick="updateCartFromModal('${item.id}', 1)" class="w-8 h-8 rounded-full bg-amber-500 hover:bg-amber-400 text-slate-900 flex items-center justify-center transition-all">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"/></svg>
-              </button>
+            
+            <div class="flex items-center justify-between pt-3 border-t border-amber-500/10">
+              <div>
+                <div class="text-amber-100/60 text-xs mb-1">ราคา/หน่วย</div>
+                <div class="text-amber-400 font-semibold">฿${item.price.toLocaleString()}</div>
+              </div>
+              
+              <div class="flex items-center gap-2">
+                <button onclick="updateCartFromModal('${item.id}', -1)" class="w-8 h-8 rounded-full bg-slate-700 hover:bg-slate-600 text-amber-400 flex items-center justify-center transition-all hover:scale-110">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M20 12H4"/></svg>
+                </button>
+                <span class="w-8 text-center font-bold text-amber-100 text-lg">${item.quantity}</span>
+                <button onclick="updateCartFromModal('${item.id}', 1)" class="w-8 h-8 rounded-full bg-amber-500 hover:bg-amber-400 text-slate-900 flex items-center justify-center transition-all hover:scale-110">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"/></svg>
+                </button>
+              </div>
+              
+              <div class="text-right">
+                <div class="text-amber-100/60 text-xs mb-1">รวม</div>
+                <div class="text-amber-400 font-bold text-lg">฿${itemSubtotal.toLocaleString()}</div>
+              </div>
             </div>
           </div>
         `;
@@ -597,31 +654,6 @@
       document.getElementById('cart-modal').classList.add('hidden');
     }
     
-    function selectTable(tableNumber) {
-      selectedTable = tableNumber;
-      
-      const tableButtons = document.querySelectorAll('.table-btn');
-      tableButtons.forEach(btn => {
-        const btnTable = parseInt(btn.dataset.table);
-        if (btnTable === tableNumber) {
-          btn.classList.remove('bg-slate-800', 'border-amber-500/20');
-          btn.classList.add('bg-gradient-to-br', 'from-amber-500', 'to-amber-600', 'border-amber-400', 'scale-105', 'shadow-lg', 'shadow-amber-500/30');
-          const span = btn.querySelector('span');
-          span.classList.remove('text-amber-100');
-          span.classList.add('text-slate-900');
-        } else {
-          btn.classList.add('bg-slate-800', 'border-amber-500/20');
-          btn.classList.remove('bg-gradient-to-br', 'from-amber-500', 'to-amber-600', 'border-amber-400', 'scale-105', 'shadow-lg', 'shadow-amber-500/30');
-          const span = btn.querySelector('span');
-          span.classList.remove('text-slate-900');
-          span.classList.add('text-amber-100');
-        }
-      });
-      
-      const confirmBtnText = document.getElementById('confirm-btn-text');
-      confirmBtnText.textContent = `ยืนยันคำสั่งซื้อ (โต๊ะ ${tableNumber})`;
-    }
-    
     function placeOrder() {
       if (cart.length === 0) return;
       
@@ -631,7 +663,7 @@
       const orderData = {
         id: orderId,
         items: cart,
-        table: selectedTable || 'ไม่ระบุ',
+        table: selectedTable,
         total: total,
         timestamp: firebase.database.ServerValue.TIMESTAMP,
         status: 'pending',
@@ -643,18 +675,11 @@
         .then(() => {
           console.log('✅ Order saved to Firebase!');
           
-          // Clear cart
+          // Clear cart only (keep table occupied)
           hideCart();
           cart = [];
-          selectedTable = null;
           updateCartUI();
           renderMenu();
-          
-          // Reset button text
-          const confirmBtnText = document.getElementById('confirm-btn-text');
-          if (confirmBtnText) {
-            confirmBtnText.textContent = 'ยืนยันคำสั่งซื้อ';
-          }
           
           // Show success modal
           const successModal = document.getElementById('success-modal');
@@ -700,21 +725,22 @@
       }
     }
     
-    function showMainApp() {
-      const splash = document.getElementById('splash-screen');
-      const main = document.getElementById('main-app');
-      
-      splash.classList.add('page-hidden');
-      splash.classList.remove('page-visible');
-      
-      setTimeout(() => {
-        main.classList.remove('page-hidden');
-        main.classList.add('page-visible');
-      }, 300);
+    // Wait for both DOM and Firebase to be ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        if (typeof firebase !== 'undefined') {
+          initializeApp();
+        } else {
+          window.addEventListener('load', initializeApp);
+        }
+      });
+    } else {
+      if (typeof firebase !== 'undefined') {
+        initializeApp();
+      } else {
+        window.addEventListener('load', initializeApp);
+      }
     }
-    
-    // Initialize
-    renderMenu();
   </script>
 </body>
 </html>

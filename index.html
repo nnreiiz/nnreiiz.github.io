@@ -209,6 +209,12 @@
           </div>
           
           <div class="flex items-center gap-3">
+            <button onclick="viewMyBill()" class="p-3 rounded-full bg-slate-800 border border-amber-500/30 hover:border-amber-500 transition-all duration-300 hover:scale-110">
+              <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+            </button>
+            
             <button onclick="changeTable()" class="p-3 rounded-full bg-slate-800 border border-amber-500/30 hover:border-amber-500 transition-all duration-300 hover:scale-110">
               <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
@@ -329,6 +335,81 @@
         </button>
       </div>
     </div>
+
+    <!-- My Bill Modal -->
+    <div id="my-bill-modal" class="fixed inset-0 z-50 hidden" onclick="closeMyBill()">
+      <div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+      <div class="absolute inset-4 md:inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-full md:max-w-4xl md:max-h-[90vh] bg-slate-900 rounded-3xl overflow-hidden border-2 border-amber-500/50 shadow-2xl" onclick="event.stopPropagation()">
+        
+        <!-- Bill Header -->
+        <div class="bg-gradient-to-r from-amber-500/20 to-amber-600/20 px-8 py-6 border-b border-amber-500/30">
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-4xl">📋</span>
+                <h2 class="playfair text-3xl font-bold text-amber-400">บิลของฉัน</h2>
+              </div>
+              <p class="text-amber-100/70">โต๊ะ <span id="my-bill-table">-</span> • รายการสั่งอาหารทั้งหมด</p>
+            </div>
+            <button onclick="closeMyBill()" class="p-3 rounded-full bg-slate-800 hover:bg-slate-700 transition-colors">
+              <svg class="w-6 h-6 text-amber-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Bill Content -->
+        <div class="overflow-auto" style="max-height: calc(90vh - 300px);">
+          <div class="p-8">
+            
+            <!-- Orders List -->
+            <div id="my-bill-orders" class="space-y-6">
+              <!-- Orders will be rendered here -->
+            </div>
+
+            <div id="my-bill-empty" class="text-center py-12 hidden">
+              <span class="text-6xl mb-4 block opacity-50">🍽️</span>
+              <p class="text-amber-100/50 text-lg">ยังไม่มีรายการสั่งอาหาร</p>
+              <p class="text-amber-100/30 text-sm mt-2">สั่งอาหารจากเมนูเพื่อเริ่มต้น</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bill Footer -->
+        <div class="bg-slate-800/50 border-t-2 border-amber-500/30 px-8 py-6">
+          <div class="flex justify-between items-center text-xl mb-4">
+            <div>
+              <div class="text-amber-100/70 text-sm mb-1">ยอดรวมทั้งหมด</div>
+              <span id="my-bill-total" class="playfair text-3xl font-bold text-amber-400">฿0</span>
+            </div>
+            <div class="text-right">
+              <div class="text-amber-100/70 text-sm mb-1">จำนวนออเดอร์</div>
+              <span id="my-bill-count" class="text-2xl font-bold text-amber-400">0</span>
+            </div>
+          </div>
+          
+          <div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-4 mb-4">
+            <div class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-blue-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <div class="flex-1">
+                <div class="text-blue-300 font-medium text-sm mb-1">💡 หมายเหตุ</div>
+                <div class="text-blue-100/70 text-xs leading-relaxed">
+                  นี่คือตัวอย่างแอพเท่านั้น ในร้านจริงจะมีพนักงานเก็บเงิน<br>
+                  ระบบนี้แสดงให้เห็นว่าโต๊ะจะถูกล็อคจนกว่าจะชำระเงิน
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <button onclick="closeMyBill()" class="w-full py-4 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 font-bold text-lg rounded-xl transition-all hover:scale-[1.02]">
+            ปิด
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -337,6 +418,7 @@
     let selectedTable = null;
     let occupiedTables = {};
     let database = null;
+    let allOrders = {};
 
     // Wait for Firebase to load
     function initializeApp() {
@@ -368,6 +450,11 @@
       database.ref('tables').on('value', (snapshot) => {
         occupiedTables = snapshot.val() || {};
         renderTableSelection();
+      });
+      
+      // Listen to all orders
+      database.ref('orders').on('value', (snapshot) => {
+        allOrders = snapshot.val() || {};
       });
       
       // Listen to completed orders to free up tables
@@ -696,6 +783,91 @@
       const successModal = document.getElementById('success-modal');
       successModal.classList.add('hidden');
       successModal.classList.remove('flex');
+    }
+    
+    function viewMyBill() {
+      if (!selectedTable) return;
+      
+      const modal = document.getElementById('my-bill-modal');
+      const tableNum = document.getElementById('my-bill-table');
+      const billOrders = document.getElementById('my-bill-orders');
+      const billEmpty = document.getElementById('my-bill-empty');
+      const billTotal = document.getElementById('my-bill-total');
+      const billCount = document.getElementById('my-bill-count');
+
+      tableNum.textContent = selectedTable;
+      modal.classList.remove('hidden');
+
+      // Get all orders for this table that are not paid
+      const myOrders = Object.entries(allOrders)
+        .filter(([_, order]) => order.table == selectedTable && order.status !== 'paid')
+        .map(([id, order]) => ({ id, ...order }))
+        .sort((a, b) => a.timestamp - b.timestamp);
+
+      if (myOrders.length === 0) {
+        billOrders.classList.add('hidden');
+        billEmpty.classList.remove('hidden');
+        billTotal.textContent = '฿0';
+        billCount.textContent = '0';
+        return;
+      }
+
+      billEmpty.classList.add('hidden');
+      billOrders.classList.remove('hidden');
+
+      const total = myOrders.reduce((sum, order) => sum + order.total, 0);
+      billTotal.textContent = '฿' + total.toLocaleString();
+      billCount.textContent = myOrders.length;
+
+      billOrders.innerHTML = myOrders.map((order, index) => {
+        const orderTime = new Date(order.timestamp);
+        const statusText = order.status === 'completed' ? 'เสร็จแล้ว ✅' : 'กำลังทำ ⏳';
+        const statusColor = order.status === 'completed' ? 'text-emerald-400' : 'text-amber-400';
+
+        return `
+          <div class="bg-slate-800/70 rounded-2xl border-2 border-amber-500/20 overflow-hidden">
+            <!-- Order Header -->
+            <div class="bg-gradient-to-r from-slate-700/50 to-slate-800/50 px-6 py-4 border-b border-amber-500/20">
+              <div class="flex items-center justify-between">
+                <div>
+                  <div class="text-amber-100/60 text-sm">ออเดอร์ที่ ${index + 1}</div>
+                  <div class="text-amber-100 text-sm">
+                    ⏰ ${orderTime.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' })}
+                  </div>
+                </div>
+                <div class="text-right">
+                  <div class="${statusColor} font-medium text-sm mb-1">${statusText}</div>
+                  <div class="playfair text-2xl font-bold text-amber-400">฿${order.total.toLocaleString()}</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Order Items -->
+            <div class="p-6 space-y-3">
+              ${order.items.map(item => `
+                <div class="flex items-center justify-between bg-slate-900/50 rounded-xl p-4 border border-amber-500/10">
+                  <div class="flex items-center gap-3 flex-1">
+                    ${item.image ? `
+                      <img src="${item.image}" alt="${item.name}" class="w-12 h-12 object-cover rounded-lg">
+                    ` : `
+                      <span class="text-2xl">${item.emoji || '🍽️'}</span>
+                    `}
+                    <div>
+                      <div class="font-semibold text-amber-100">${item.name}</div>
+                      <div class="text-amber-100/50 text-sm">฿${item.price.toLocaleString()} × ${item.quantity}</div>
+                    </div>
+                  </div>
+                  <div class="text-amber-400 font-bold">฿${(item.price * item.quantity).toLocaleString()}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+    
+    function closeMyBill() {
+      document.getElementById('my-bill-modal').classList.add('hidden');
     }
     
     function switchTab(tab) {

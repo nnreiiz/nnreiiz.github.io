@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="th" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delicious Menu</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Prompt', sans-serif; }
+    .font-display { font-family: 'Playfair Display', serif; }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(5deg); }
+    }
+    
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(255, 183, 77, 0.4); }
+      50% { box-shadow: 0 0 40px rgba(255, 183, 77, 0.8); }
+    }
+    
+    @keyframes slide-up {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes scale-in {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    
+    @keyframes bounce-in {
+      0% { transform: scale(0); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    
+    .animate-float { animation: float 6s ease-in-out infinite; }
+    .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+    .animate-slide-up { animation: slide-up 0.8s ease-out forwards; }
+    .animate-fade-in { animation: fade-in 1s ease-out forwards; }
+    .animate-scale-in { animation: scale-in 0.5s ease-out forwards; }
+    .animate-bounce-in { animation: bounce-in 0.6s ease-out forwards; }
+    
+    .shimmer-bg {
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      background-size: 200% 100%;
+      animation: shimmer 2s infinite;
+    }
+    
+    .menu-card {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .menu-card:hover {
+      transform: translateY(-8px) scale(1.02);
+    }
+    
+    .tab-indicator {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .cart-badge {
+      animation: bounce-in 0.3s ease-out;
+    }
+    
+    .page-transition {
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .order-item {
+      animation: slide-up 0.4s ease-out forwards;
+    }
+    
+    .gradient-text {
+      background: linear-gradient(135deg, #FFB74D 0%, #FF8A65 50%, #FFB74D 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .glass-effect {
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+    
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: rgba(255,255,255,0.1); }
+    ::-webkit-scrollbar-thumb { background: rgba(255,183,77,0.5); border-radius: 3px; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full m-0 p-0 overflow-hidden">
+  <div id="app" class="h-full w-full overflow-auto" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);"><!-- Splash Screen -->
+   <div id="splash-screen" class="h-full w-full flex flex-col items-center justify-center relative overflow-hidden"><!-- Decorative Elements -->
+    <div class="absolute top-10 left-10 w-20 h-20 rounded-full opacity-20" style="background: #FFB74D; filter: blur(40px);"></div>
+    <div class="absolute bottom-20 right-10 w-32 h-32 rounded-full opacity-20" style="background: #FF8A65; filter: blur(50px);"></div>
+    <div class="absolute top-1/3 right-20 w-16 h-16 rounded-full opacity-10" style="background: #FFD54F; filter: blur(30px);"></div><!-- App Icon -->
+    <div class="animate-float mb-8">
+     <div class="w-[300px] h-[300px] rounded-[60px] flex items-center justify-center animate-pulse-glow relative overflow-hidden" style="background: linear-gradient(145deg, #2a2a4a 0%, #1a1a35 100%); border: 3px solid rgba(255,183,77,0.3);">
+      <div class="absolute inset-0 shimmer-bg"></div>
+      <div class="relative z-10 text-center">
+       <div class="text-8xl mb-2">
+        🍽️
+       </div>
+       <div class="flex justify-center gap-2 mt-4"><span class="text-4xl animate-bounce" style="animation-delay: 0s;">🍜</span> <span class="text-4xl animate-bounce" style="animation-delay: 0.1s;">🍣</span> <span class="text-4xl animate-bounce" style="animation-delay: 0.2s;">🥤</span>
+       </div>
+      </div>
+     </div>
+    </div><!-- App Name -->
+    <h1 id="splash-app-name" class="font-display text-5xl md:text-6xl font-bold gradient-text mb-4 animate-slide-up text-center px-4">Delicious Menu</h1><!-- Tagline -->
+    <p id="splash-tagline" class="text-gray-400 text-lg md:text-xl mb-12 animate-slide-up text-center px-4" style="animation-delay: 0.2s;">อร่อยทุกจาน เลือกได้ตามใจ</p><!-- Start Button --> <button id="start-btn" onclick="showMainApp()" class="px-12 py-4 rounded-full text-xl font-semibold text-gray-900 transform hover:scale-105 transition-all duration-300 animate-slide-up relative overflow-hidden group" style="background: linear-gradient(135deg, #FFB74D 0%, #FF8A65 100%); animation-delay: 0.4s;"> <span class="relative z-10" id="start-btn-text">เริ่มสั่งอาหาร</span>
+     <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div></button> <!-- Decorative dots -->
+    <div class="flex gap-2 mt-8 animate-fade-in" style="animation-delay: 0.6s;">
+     <div class="w-2 h-2 rounded-full" style="background: #FFB74D;"></div>
+     <div class="w-2 h-2 rounded-full" style="background: #FF8A65;"></div>
+     <div class="w-2 h-2 rounded-full" style="background: #FFD54F;"></div>
+    </div>
+   </div><!-- Main App -->
+   <div id="main-app" class="h-full w-full hidden flex-col"><!-- Header -->
+    <header class="glass-effect sticky top-0 z-50 px-6 py-4" style="background: rgba(26, 26, 46, 0.9); border-bottom: 1px solid rgba(255,183,77,0.2);">
+     <div class="max-w-4xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-3"><span class="text-3xl">🍽️</span> <span id="header-app-name" class="font-display text-2xl font-bold gradient-text">Delicious Menu</span>
+      </div><button onclick="showCart()" class="relative p-3 rounded-full transition-all duration-300 hover:scale-110" style="background: rgba(255,183,77,0.2);"> <span class="text-2xl">🛒</span> <span id="cart-count" class="cart-badge absolute -top-1 -right-1 w-6 h-6 rounded-full text-xs font-bold flex items-center justify-center text-gray-900" style="background: #FFB74D; display: none;">0</span> </button>
+     </div>
+    </header><!-- Tabs -->
+    <div class="px-6 py-4" style="background: rgba(26, 26, 46, 0.5);">
+     <div class="max-w-4xl mx-auto flex gap-4 relative"><button onclick="switchTab('food')" id="tab-food" class="flex-1 py-3 px-6 rounded-xl font-semibold text-lg transition-all duration-300 flex items-center justify-center gap-2" style="background: linear-gradient(135deg, #FFB74D 0%, #FF8A65 100%); color: #1a1a2e;"> <span>🍜</span> อาหาร </button> <button onclick="switchTab('drinks')" id="tab-drinks" class="flex-1 py-3 px-6 rounded-xl font-semibold text-lg transition-all duration-300 flex items-center justify-center gap-2" style="background: rgba(255,255,255,0.1); color: #9ca3af;"> <span>🥤</span> เครื่องดื่ม </button>
+     </div>
+    </div><!-- Menu Content -->
+    <main class="flex-1 overflow-auto px-6 py-6">
+     <div class="max-w-4xl mx-auto"><!-- Food Menu -->
+      <div id="food-menu" class="grid grid-cols-1 md:grid-cols-2 gap-6"><!-- Menu items will be rendered here -->
+      </div><!-- Drinks Menu -->
+      <div id="drinks-menu" class="grid grid-cols-1 md:grid-cols-2 gap-6 hidden"><!-- Menu items will be rendered here -->
+      </div>
+     </div>
+    </main><!-- Order Summary Bar -->
+    <div id="order-bar" class="glass-effect px-6 py-4 hidden" style="background: rgba(26, 26, 46, 0.95); border-top: 1px solid rgba(255,183,77,0.3);">
+     <div class="max-w-4xl mx-auto flex items-center justify-between">
+      <div>
+       <p class="text-gray-400 text-sm">ยอดรวม</p>
+       <p id="total-price" class="text-2xl font-bold gradient-text">฿0</p>
+      </div><button onclick="showCart()" class="px-8 py-3 rounded-full font-semibold text-gray-900 transform hover:scale-105 transition-all duration-300" style="background: linear-gradient(135deg, #FFB74D 0%, #FF8A65 100%);"> ดูรายการสั่ง </button>
+     </div>
+    </div>
+   </div><!-- Cart Modal -->
+   <div id="cart-modal" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/70" onclick="hideCart()"></div>
+    <div class="absolute bottom-0 left-0 right-0 max-h-[85%] rounded-t-3xl overflow-hidden page-transition" style="background: linear-gradient(180deg, #2a2a4a 0%, #1a1a35 100%);">
+     <div class="p-6">
+      <div class="flex items-center justify-between mb-6">
+       <h2 class="text-2xl font-bold gradient-text">🛒 รายการสั่งซื้อ</h2><button onclick="hideCart()" class="w-10 h-10 rounded-full flex items-center justify-center text-2xl" style="background: rgba(255,255,255,0.1);">×</button>
+      </div>
+      <div id="cart-items" class="space-y-4 max-h-64 overflow-auto mb-6"><!-- Cart items will be rendered here -->
+      </div>
+      <div id="cart-empty" class="text-center py-12 text-gray-400"><span class="text-6xl mb-4 block">🛒</span>
+       <p>ยังไม่มีรายการสั่งซื้อ</p>
+      </div>
+      <div id="cart-summary" class="hidden">
+       <div class="border-t border-gray-700 pt-4 mb-4">
+        <div class="flex justify-between text-lg mb-2"><span class="text-gray-400">รวมทั้งหมด</span> <span id="cart-total" class="font-bold gradient-text">฿0</span>
+        </div>
+       </div><button onclick="confirmOrder()" class="w-full py-4 rounded-xl font-semibold text-xl text-gray-900 transform hover:scale-[1.02] transition-all duration-300" style="background: linear-gradient(135deg, #FFB74D 0%, #FF8A65 100%);"> ✓ ยืนยันคำสั่งซื้อ </button>
+      </div>
+     </div>
+    </div>
+   </div><!-- Success Modal -->
+   <div id="success-modal" class="fixed inset-0 z-50 hidden items-center justify-center" style="background: rgba(0,0,0,0.8);">
+    <div class="text-center p-8 rounded-3xl animate-scale-in max-w-sm mx-4" style="background: linear-gradient(145deg, #2a2a4a 0%, #1a1a35 100%); border: 2px solid rgba(255,183,77,0.3);">
+     <div class="text-8xl mb-4 animate-bounce">
+      ✅
+     </div>
+     <h2 class="text-2xl font-bold gradient-text mb-2">สั่งอาหารสำเร็จ!</h2>
+     <p class="text-gray-400 mb-6">ขอบคุณที่ใช้บริการ</p><button onclick="closeSuccess()" class="px-8 py-3 rounded-full font-semibold text-gray-900" style="background: linear-gradient(135deg, #FFB74D 0%, #FF8A65 100%);"> สั่งอีกครั้ง </button>
+    </div>
+   </div>
+  </div>
+  <script>
+    // Default configuration
+    const defaultConfig = {
+      app_name: 'Delicious Menu',
+      tagline: 'อร่อยทุกจาน เลือกได้ตามใจ',
+      start_button: 'เริ่มสั่งอาหาร',
+      background_color: '#1a1a2e',
+      surface_color: '#2a2a4a',
+      text_color: '#f3f4f6',
+      primary_action_color: '#FFB74D',
+      secondary_action_color: '#FF8A65',
+      font_family: 'Prompt',
+      font_size: 16
+    };
+    
+    // Menu Data
+    const foodMenu = [
+      { id: 'f1', name: 'ข้าวผัดปู', price: 120, emoji: '🦀', desc: 'ข้าวผัดเนื้อปูแน่นๆ หอมกระเทียม' },
+      { id: 'f2', name: 'ต้มยำกุ้ง', price: 180, emoji: '🦐', desc: 'รสจัดจ้าน น้ำข้นสไตล์ต้นตำรับ' },
+      { id: 'f3', name: 'ผัดไทย', price: 80, emoji: '🍜', desc: 'ผัดไทยกุ้งสด โรยถั่วลิสง' },
+      { id: 'f4', name: 'ส้มตำไทย', price: 60, emoji: '🥗', desc: 'รสเปรี้ยวหวาน ใส่กุ้งแห้ง' },
+      { id: 'f5', name: 'ข้าวมันไก่', price: 70, emoji: '🍗', desc: 'ไก่นุ่ม ข้าวหอม น้ำจิ้มรสเด็ด' },
+      { id: 'f6', name: 'แกงเขียวหวาน', price: 90, emoji: '🍛', desc: 'เนื้อไก่นุ่ม พริกหอมเข้มข้น' }
+    ];
+    
+    const drinksMenu = [
+      { id: 'd1', name: 'ชาไทย', price: 45, emoji: '🧋', desc: 'ชาไทยหวานมัน เย็นชื่นใจ' },
+      { id: 'd2', name: 'กาแฟเย็น', price: 50, emoji: '☕', desc: 'กาแฟโบราณ หอมกรุ่น' },
+      { id: 'd3', name: 'น้ำมะพร้าว', price: 40, emoji: '🥥', desc: 'น้ำมะพร้าวสด เย็นชื่นใจ' },
+      { id: 'd4', name: 'สมูทตี้มะม่วง', price: 65, emoji: '🥭', desc: 'มะม่วงสุกปั่นเนียน' },
+      { id: 'd5', name: 'น้ำส้มคั้น', price: 55, emoji: '🍊', desc: 'ส้มคั้นสดวิตามินซีเต็มแก้ว' },
+      { id: 'd6', name: 'โกโก้เย็น', price: 55, emoji: '🍫', desc: 'โกโก้เข้มข้น หวานมัน' }
+    ];
+    
+    let cart = [];
+    let currentTab = 'food';
+    
+    // Initialize SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => {
+          // Update splash screen
+          const splashName = document.getElementById('splash-app-name');
+          const splashTagline = document.getElementById('splash-tagline');
+          const startBtnText = document.getElementById('start-btn-text');
+          const headerName = document.getElementById('header-app-name');
+          
+          const fontFamily = config.font_family || defaultConfig.font_family;
+          const baseFontStack = 'Prompt, sans-serif';
+          const displayFontStack = 'Playfair Display, serif';
+          
+          if (splashName) {
+            splashName.textContent = config.app_name || defaultConfig.app_name;
+            splashName.style.fontFamily = `${fontFamily}, ${displayFontStack}`;
+          }
+          if (splashTagline) {
+            splashTagline.textContent = config.tagline || defaultConfig.tagline;
+            splashTagline.style.fontFamily = `${fontFamily}, ${baseFontStack}`;
+          }
+          if (startBtnText) {
+            startBtnText.textContent = config.start_button || defaultConfig.start_button;
+            startBtnText.style.fontFamily = `${fontFamily}, ${baseFontStack}`;
+          }
+          if (headerName) {
+            headerName.textContent = config.app_name || defaultConfig.app_name;
+            headerName.style.fontFamily = `${fontFamily}, ${displayFontStack}`;
+          }
+          
+          // Apply colors
+          const bgColor = config.background_color || defaultConfig.background_color;
+          const surfaceColor = config.surface_color || defaultConfig.surface_color;
+          const textColor = config.text_color || defaultConfig.text_color;
+          const primaryColor = config.primary_action_color || defaultConfig.primary_action_color;
+          const secondaryColor = config.secondary_action_color || defaultConfig.secondary_action_color;
+          
+          document.body.style.color = textColor;
+          
+          // Update gradient text elements
+          const gradientElements = document.querySelectorAll('.gradient-text');
+          gradientElements.forEach(el => {
+            el.style.background = `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 50%, ${primaryColor} 100%)`;
+            el.style.webkitBackgroundClip = 'text';
+            el.style.webkitTextFillColor = 'transparent';
+            el.style.backgroundClip = 'text';
+          });
+          
+          // Update primary buttons
+          const primaryBtns = document.querySelectorAll('[style*="linear-gradient(135deg, #FFB74D"]');
+          primaryBtns.forEach(btn => {
+            btn.style.background = `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`;
+          });
+          
+          // Apply font size
+          const fontSize = config.font_size || defaultConfig.font_size;
+          document.body.style.fontSize = `${fontSize}px`;
+        },
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.background_color || defaultConfig.background_color,
+              set: (value) => { config.background_color = value; window.elementSdk.setConfig({ background_color: value }); }
+            },
+            {
+              get: () => config.surface_color || defaultConfig.surface_color,
+              set: (value) => { config.surface_color = value; window.elementSdk.setConfig({ surface_color: value }); }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => { config.text_color = value; window.elementSdk.setConfig({ text_color: value }); }
+            },
+            {
+              get: () => config.primary_action_color || defaultConfig.primary_action_color,
+              set: (value) => { config.primary_action_color = value; window.elementSdk.setConfig({ primary_action_color: value }); }
+            },
+            {
+              get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+              set: (value) => { config.secondary_action_color = value; window.elementSdk.setConfig({ secondary_action_color: value }); }
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => { config.font_family = value; window.elementSdk.setConfig({ font_family: value }); }
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => { config.font_size = value; window.elementSdk.setConfig({ font_size: value }); }
+          }
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ['app_name', config.app_name || defaultConfig.app_name],
+          ['tagline', config.tagline || defaultConfig.tagline],
+          ['start_button', config.start_button || defaultConfig.start_button]
+        ])
+      });
+    }
+    
+    // App Functions
+    function showMainApp() {
+      const splash = document.getElementById('splash-screen');
+      const mainApp = document.getElementById('main-app');
+      
+      splash.style.opacity = '0';
+      splash.style.transform = 'scale(0.95)';
+      splash.style.transition = 'all 0.5s ease-out';
+      
+      setTimeout(() => {
+        splash.classList.add('hidden');
+        mainApp.classList.remove('hidden');
+        mainApp.classList.add('flex');
+        mainApp.style.opacity = '0';
+        mainApp.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+          mainApp.style.transition = 'all 0.5s ease-out';
+          mainApp.style.opacity = '1';
+          mainApp.style.transform = 'translateY(0)';
+          renderMenus();
+        }, 50);
+      }, 500);
+    }
+    
+    function renderMenus() {
+      renderMenu('food-menu', foodMenu);
+      renderMenu('drinks-menu', drinksMenu);
+    }
+    
+    function renderMenu(containerId, items) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = items.map((item, index) => `
+        <div class="menu-card rounded-2xl p-5 cursor-pointer" 
+             style="background: linear-gradient(145deg, #2a2a4a 0%, #1f1f3a 100%); border: 1px solid rgba(255,183,77,0.1); animation: slide-up 0.5s ease-out forwards; animation-delay: ${index * 0.1}s; opacity: 0;">
+          <div class="flex items-start gap-4">
+            <div class="text-5xl">${item.emoji}</div>
+            <div class="flex-1">
+              <h3 class="text-xl font-semibold text-white mb-1">${item.name}</h3>
+              <p class="text-gray-400 text-sm mb-3">${item.desc}</p>
+              <div class="flex items-center justify-between">
+                <span class="text-xl font-bold gradient-text">฿${item.price}</span>
+                <button onclick="addToCart('${item.id}', '${item.name}', ${item.price}, '${item.emoji}')" 
+                        class="px-4 py-2 rounded-full text-sm font-semibold text-gray-900 transform hover:scale-105 active:scale-95 transition-all duration-200"
+                        style="background: linear-gradient(135deg, #FFB74D 0%, #FF8A65 100%);">
+                  + เพิ่ม
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+    
+    function switchTab(tab) {
+      currentTab = tab;
+      const foodTab = document.getElementById('tab-food');
+      const drinksTab = document.getElementById('tab-drinks');
+      const foodMenu = document.getElementById('food-menu');
+      const drinksMenu = document.getElementById('drinks-menu');
+      
+      if (tab === 'food') {
+        foodTab.style.background = 'linear-gradient(135deg, #FFB74D 0%, #FF8A65 100%)';
+        foodTab.style.color = '#1a1a2e';
+        drinksTab.style.background = 'rgba(255,255,255,0.1)';
+        drinksTab.style.color = '#9ca3af';
+        foodMenu.classList.remove('hidden');
+        drinksMenu.classList.add('hidden');
+      } else {
+        drinksTab.style.background = 'linear-gradient(135deg, #FFB74D 0%, #FF8A65 100%)';
+        drinksTab.style.color = '#1a1a2e';
+        foodTab.style.background = 'rgba(255,255,255,0.1)';
+        foodTab.style.color = '#9ca3af';
+        drinksMenu.classList.remove('hidden');
+        foodMenu.classList.add('hidden');
+      }
+    }
+    
+    function addToCart(id, name, price, emoji) {
+      const existing = cart.find(item => item.id === id);
+      if (existing) {
+        existing.quantity++;
+      } else {
+        cart.push({ id, name, price, emoji, quantity: 1 });
+      }
+      updateCartUI();
+      
+      // Show toast
+      showToast(`เพิ่ม ${name} แล้ว!`);
+    }
+    
+    function showToast(message) {
+      const toast = document.createElement('div');
+      toast.className = 'fixed top-24 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-full text-gray-900 font-semibold z-50 animate-scale-in';
+      toast.style.background = 'linear-gradient(135deg, #FFB74D 0%, #FF8A65 100%)';
+      toast.textContent = message;
+      document.body.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translate(-50%, -20px)';
+        toast.style.transition = 'all 0.3s ease-out';
+        setTimeout(() => toast.remove(), 300);
+      }, 2000);
+    }
+    
+    function updateCartUI() {
+      const cartCount = document.getElementById('cart-count');
+      const orderBar = document.getElementById('order-bar');
+      const totalPrice = document.getElementById('total-price');
+      
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      
+      if (totalItems > 0) {
+        cartCount.style.display = 'flex';
+        cartCount.textContent = totalItems;
+        orderBar.classList.remove('hidden');
+        totalPrice.textContent = `฿${total}`;
+      } else {
+        cartCount.style.display = 'none';
+        orderBar.classList.add('hidden');
+      }
+    }
+    
+    function showCart() {
+      const modal = document.getElementById('cart-modal');
+      const cartItems = document.getElementById('cart-items');
+      const cartEmpty = document.getElementById('cart-empty');
+      const cartSummary = document.getElementById('cart-summary');
+      const cartTotal = document.getElementById('cart-total');
+      
+      modal.classList.remove('hidden');
+      
+      if (cart.length === 0) {
+        cartEmpty.classList.remove('hidden');
+        cartSummary.classList.add('hidden');
+        cartItems.innerHTML = '';
+      } else {
+        cartEmpty.classList.add('hidden');
+        cartSummary.classList.remove('hidden');
+        
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        cartTotal.textContent = `฿${total}`;
+        
+        cartItems.innerHTML = cart.map((item, index) => `
+          <div class="order-item flex items-center justify-between p-4 rounded-xl" 
+               style="background: rgba(255,255,255,0.05); animation-delay: ${index * 0.1}s;">
+            <div class="flex items-center gap-3">
+              <span class="text-3xl">${item.emoji}</span>
+              <div>
+                <p class="font-semibold text-white">${item.name}</p>
+                <p class="text-sm text-gray-400">฿${item.price} x ${item.quantity}</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="updateQuantity('${item.id}', -1)" class="w-8 h-8 rounded-full flex items-center justify-center text-lg font-bold" style="background: rgba(255,255,255,0.1);">−</button>
+              <span class="w-8 text-center font-semibold">${item.quantity}</span>
+              <button onclick="updateQuantity('${item.id}', 1)" class="w-8 h-8 rounded-full flex items-center justify-center text-lg font-bold" style="background: rgba(255,183,77,0.3);">+</button>
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+    
+    function hideCart() {
+      document.getElementById('cart-modal').classList.add('hidden');
+    }
+    
+    function updateQuantity(id, change) {
+      const item = cart.find(i => i.id === id);
+      if (item) {
+        item.quantity += change;
+        if (item.quantity <= 0) {
+          cart = cart.filter(i => i.id !== id);
+        }
+      }
+      updateCartUI();
+      showCart();
+    }
+    
+    function confirmOrder() {
+      hideCart();
+      document.getElementById('success-modal').classList.remove('hidden');
+      document.getElementById('success-modal').classList.add('flex');
+      cart = [];
+      updateCartUI();
+    }
+    
+    function closeSuccess() {
+      document.getElementById('success-modal').classList.add('hidden');
+      document.getElementById('success-modal').classList.remove('flex');
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d44c82a75ff7336',t:'MTc3MjE2NDg5Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
